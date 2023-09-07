@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/indistraw_local
+    username: root
+    password: ${DB_LOCAL_PASSWORD}
+
+  redis:
+    host: localhost
+    port: 6379
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+jwt:
+  access-secret: ${JWT_ACCESS_SECRET}
+  refresh-secret: ${JWT_REFRESH_SECRET}
+  time:
+    access-exp: ${JWT_ACCESS_EXP}
+    refresh-exp: ${JWT_REFRESH_EXP}
+
+coolsms:
+  access: ${COOLSMS_ACCESS}
+  secret: ${COOLSMS_SECRET}
+  phone-number: ${COOLSMS_PHONE_NUMBER}
+
+bootpay:
+  rest-application-id: ${REST_APPLICATION_ID}
+  private-key: ${PRIVATE_KEY}
