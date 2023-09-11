@@ -14,12 +14,12 @@ class CommandAccountPersistenceAdapter(
 ): CommandAccountPort {
 
     override fun saveAccount(account: Account): UUID {
-        val accountEntity = accountMapper toEntity account
+        val accountEntity = accountMapper.toEntity(account)
         return accountRepository.save(accountEntity).accountIdx
     }
 
     override fun deleteAccount(account: Account) {
-        val accountEntity = accountMapper toEntity account
+        val accountEntity = accountMapper.toEntity(account)
         return accountRepository.delete(accountEntity)
     }
 

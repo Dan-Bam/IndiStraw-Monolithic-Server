@@ -22,17 +22,17 @@ class QueryAccountPersistenceAdapter(
 
     override fun findByIdOrNull(id: String): Account? {
         val accountEntity = accountRepository.findById(id)
-        return accountMapper toDomain accountEntity
+        return accountMapper.toDomain(accountEntity)
     }
 
     override fun findByIdxOrNull(idx: UUID): Account? {
         val accountEntity = accountRepository.findByIdOrNull(idx)
-        return accountMapper toDomain accountEntity
+        return accountMapper.toDomain(accountEntity)
     }
 
     override fun findByPhoneNumberOrNull(phoneNumber: String): Account? {
         val accountEntity = accountRepository.findByPhoneNumber(phoneNumber)
-        return accountMapper toDomain accountEntity
+        return accountMapper.toDomain(accountEntity)
     }
 
 }

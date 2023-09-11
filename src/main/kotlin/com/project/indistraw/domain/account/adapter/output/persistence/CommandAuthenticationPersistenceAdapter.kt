@@ -13,12 +13,12 @@ class CommandAuthenticationPersistenceAdapter(
 ): CommandAuthenticationPort {
 
     override fun saveAuthentication(authentication: Authentication) {
-        val authenticationEntity = authenticationMapper toEntity authentication
+        val authenticationEntity = authenticationMapper.toEntity(authentication)
         authenticationRepository.save(authenticationEntity)
     }
 
     override fun deleteAuthentication(authentication: Authentication) {
-        val authenticationEntity = authenticationMapper toEntity authentication
+        val authenticationEntity = authenticationMapper.toEntity(authentication)
         authenticationRepository.delete(authenticationEntity)
     }
 

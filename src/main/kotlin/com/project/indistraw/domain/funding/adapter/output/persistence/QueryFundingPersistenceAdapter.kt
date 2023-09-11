@@ -47,7 +47,7 @@ class QueryFundingPersistenceAdapter(
             .join(QFundingEntity.fundingEntity.orderer, QAccountEntity.accountEntity)
             .where(QFundingEntity.fundingEntity.crowdfunding.idx.eq(crowdfundingIdx))
             .fetch()
-            .map { (accountMapper toDomain it)!! }
+            .map { (accountMapper.toDomain(it)!!) }
 
     override fun findByOrdererIdx(ordererIdx: UUID): List<Funding> {
         return queryFactory.selectDistinct(QFundingEntity.fundingEntity)

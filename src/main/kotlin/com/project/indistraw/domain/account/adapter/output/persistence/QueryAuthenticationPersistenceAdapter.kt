@@ -15,7 +15,7 @@ class QueryAuthenticationPersistenceAdapter(
 
     override fun findByPhoneNumberOrNull(phoneNumber: String): Authentication? {
         val authenticationEntity = authenticationRepository.findByIdOrNull(phoneNumber)
-        return authenticationMapper toDomain authenticationEntity
+        return authenticationMapper.toDomain(authenticationEntity)
     }
 
     override fun existsByPhoneNumber(phoneNumber: String): Boolean {
