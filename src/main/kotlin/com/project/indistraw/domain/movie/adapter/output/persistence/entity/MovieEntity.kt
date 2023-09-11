@@ -28,5 +28,9 @@ class MovieEntity(
 
     @ElementCollection
     @Column(name = "movie_highlight")
-    val movieHighLight: List<String>
+    val movieHighLight: List<String>,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    var genre: Genre?,
 ): BaseIdEntity(idx)

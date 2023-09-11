@@ -29,7 +29,8 @@ class CreateMovieService(
                 movieUrl = it.movieUrl,
                 thumbnailUrl = it.thumbnailUrl,
                 account = account,
-                movieHighLight = dto.movieHighlight
+                movieHighLight = dto.movieHighlight,
+                genre = null
             )
         }
 
