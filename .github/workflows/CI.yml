@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" , "develop" ]
+  pull_request:
+    branches: [ "main" , "develop" ]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Set up JDK 11 job success
+        if: ${{success()}}
+        run: echo "JDK 11 job succeeded"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build --no-daemon
+
+      - name: IndiStraw Server CI success Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ success() }}
+        with:
+          title: ✅ IndiStraw Server CI success ✅
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: 00FF00
+
+      - name: IndiStraw Server CI failed Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ failure() }}
+        with:
+          title: ❌ IndiStraw Server CI failed ❌
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: FF0000
