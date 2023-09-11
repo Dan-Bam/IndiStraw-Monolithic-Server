@@ -2,19 +2,30 @@ package com.project.indistraw.domain.account.adapter.output.persistence.mapper
 
 import com.project.indistraw.domain.account.adapter.output.persistence.entity.AuthenticationEntity
 import com.project.indistraw.domain.account.domain.Authentication
-import org.mapstruct.InjectionStrategy
-import org.mapstruct.Mapper
-import org.mapstruct.MappingConstants
-import org.mapstruct.ReportingPolicy
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
-interface AuthenticationMapper {
 
-    infix fun toEntity(domain: Authentication): AuthenticationEntity
-    infix fun toDomain(entity: AuthenticationEntity?): Authentication?
+@Component
+class AuthenticationMapper {
+
+    fun toEntity(domain: Authentication): AuthenticationEntity =
+        AuthenticationEntity(
+            phoneNumber = domain.phoneNumber,
+            authCodeCount = domain.authCodeCount,
+            authenticationCount = domain.authenticationCount,
+            isVerified = domain.isVerified,
+            expiredAt = domain.expiredAt
+        )
+
+    fun toDomain(entity: AuthenticationEntity?): Authentication? =
+        entity?.let {
+            Authentication(
+                phoneNumber = entity.phoneNumber,
+                authCodeCount = entity.authCodeCount,
+                authenticationCount = entity.authenticationCount,
+                isVerified = entity.isVerified,
+                expiredAt = entity.expiredAt
+            )
+        }
 
 }

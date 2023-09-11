@@ -2,19 +2,37 @@ package com.project.indistraw.domain.account.adapter.output.persistence.mapper
 
 import com.project.indistraw.domain.account.adapter.output.persistence.entity.AccountEntity
 import com.project.indistraw.domain.account.domain.Account
-import org.mapstruct.InjectionStrategy
-import org.mapstruct.Mapper
-import org.mapstruct.MappingConstants
-import org.mapstruct.ReportingPolicy
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
-interface AccountMapper {
+@Component
+class AccountMapper(
+    private val addressMapper: AddressMapper
+) {
 
-    infix fun toEntity(domain: Account): AccountEntity
-    infix fun toDomain(entity: AccountEntity?): Account?
+    fun toEntity(domain: Account): AccountEntity =
+        AccountEntity(
+            accountIdx = domain.accountIdx,
+            id = domain.id,
+            encodedPassword = domain.encodedPassword,
+            name = domain.name,
+            phoneNumber = domain.phoneNumber,
+            address = addressMapper.toEntity(domain.address),
+            profileUrl = domain.profileUrl,
+            authority = domain.authority
+        )
+
+    fun toDomain(entity: AccountEntity?): Account? =
+        entity?.let {
+            Account(
+                accountIdx = entity.accountIdx,
+                id = entity.id,
+                encodedPassword = entity.encodedPassword,
+                name = entity.name,
+                phoneNumber = entity.phoneNumber,
+                address = addressMapper.toDomain(entity.address),
+                profileUrl = entity.profileUrl,
+                authority = entity.authority
+            )
+        }
 
 }
