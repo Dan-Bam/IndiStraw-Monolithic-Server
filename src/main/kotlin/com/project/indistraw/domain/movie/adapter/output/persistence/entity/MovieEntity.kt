@@ -2,6 +2,7 @@ package com.project.indistraw.domain.movie.adapter.output.persistence.entity
 
 import com.project.indistraw.common.entity.BaseIdEntity
 import com.project.indistraw.domain.account.adapter.output.persistence.entity.AccountEntity
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -33,4 +34,7 @@ class MovieEntity(
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
     var genre: Genre?,
+
+    @Column(nullable = false, updatable = false)
+    val createdAt: LocalDateTime,
 ): BaseIdEntity(idx)

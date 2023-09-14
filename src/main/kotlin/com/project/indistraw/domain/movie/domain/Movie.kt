@@ -3,6 +3,7 @@ package com.project.indistraw.domain.movie.domain
 import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.AggregateRoot
 import com.project.indistraw.domain.account.domain.Account
 import com.project.indistraw.domain.movie.adapter.output.persistence.entity.Genre
+import java.time.LocalDateTime
 
 @AggregateRoot
 data class Movie(
@@ -13,5 +14,6 @@ data class Movie(
     val thumbnailUrl: String,
     val account: Account,
     val movieHighLight: List<String>,
-    val genre: Genre?
+    val genre: Genre?,
+    val createdAt: LocalDateTime
 )

@@ -19,7 +19,8 @@ class MovieMapper(
             thumbnailUrl = domain.thumbnailUrl,
             account = accountMapper.toEntity(domain.account),
             movieHighLight = domain.movieHighLight,
-            genre = domain.genre
+            genre = domain.genre,
+            createdAt = domain.createdAt
         )
 
     fun toDomain(entity: MovieEntity?): Movie? =
@@ -32,7 +33,8 @@ class MovieMapper(
                 thumbnailUrl = it.thumbnailUrl,
                 account = accountMapper.toDomain(it.account)!!,
                 movieHighLight = it.movieHighLight,
-                genre = it.genre
+                genre = it.genre,
+                createdAt = it.createdAt
             )
         }
 
