@@ -1,11 +1,13 @@
 package com.project.indistraw.domain.movie.adapter.input
 
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
-import com.project.indistraw.domain.movie.adapter.input.data.response.MovieResponse
+import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.output.persistence.entity.Genre
 import com.project.indistraw.domain.movie.application.port.input.CreateMovieUseCase
-import com.project.indistraw.domain.movie.application.port.input.FindMovieListUseCase
+import com.project.indistraw.domain.movie.application.port.input.MovieListUseCase
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,7 +23,7 @@ import javax.validation.Valid
 class MovieWebAdapter(
     private val movieDataMapper: MovieDataMapper,
     private val createMovieUseCase: CreateMovieUseCase,
-    private val findMovieListUseCase: FindMovieListUseCase
+    private val movieListUseCase: MovieListUseCase
 ) {
 
     @PostMapping
@@ -30,9 +32,9 @@ class MovieWebAdapter(
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping
-    fun findMovieList(@RequestParam("gener") genre: Genre?): ResponseEntity<List<MovieResponse>> =
-        findMovieListUseCase.execute(genre)
-            .map { movieDataMapper.toResponse(it) }
+    fun findMovieList(@PageableDefault(size=10, page = 0) pageable: Pageable, @RequestParam("keyword") genre: String?): ResponseEntity<MoviePagingResponse> =
+        movieListUseCase.execute(pageable, genre)
+            .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
