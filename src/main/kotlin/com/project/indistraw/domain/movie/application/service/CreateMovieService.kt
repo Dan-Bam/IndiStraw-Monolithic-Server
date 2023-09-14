@@ -8,6 +8,7 @@ import com.project.indistraw.domain.movie.application.port.input.CreateMovieUseC
 import com.project.indistraw.domain.movie.application.port.input.dto.CreateMovieDto
 import com.project.indistraw.domain.movie.application.port.output.CommandMoviePort
 import com.project.indistraw.domain.movie.domain.Movie
+import java.time.LocalDateTime
 
 @ServiceWithTransaction
 class CreateMovieService(
@@ -29,7 +30,9 @@ class CreateMovieService(
                 movieUrl = it.movieUrl,
                 thumbnailUrl = it.thumbnailUrl,
                 account = account,
-                movieHighLight = dto.movieHighlight
+                movieHighLight = dto.movieHighlight,
+                genre = null,
+                createdAt = LocalDateTime.now()
             )
         }
 
