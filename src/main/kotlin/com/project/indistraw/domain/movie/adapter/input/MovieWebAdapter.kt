@@ -1,17 +1,20 @@
 package com.project.indistraw.domain.movie.adapter.input
 
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
+import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.application.port.input.CreateMovieUseCase
 import com.project.indistraw.domain.movie.application.port.input.MovieDetailUseCase
 import com.project.indistraw.domain.movie.application.port.input.MovieListUseCase
+import com.project.indistraw.domain.movie.application.port.input.UpdateMovieUseCase
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -26,7 +29,8 @@ class MovieWebAdapter(
     private val movieDataMapper: MovieDataMapper,
     private val createMovieUseCase: CreateMovieUseCase,
     private val movieListUseCase: MovieListUseCase,
-    private val movieDetailUseCase: MovieDetailUseCase
+    private val movieDetailUseCase: MovieDetailUseCase,
+    private val updateMovieUseCase: UpdateMovieUseCase
 ) {
 
     @PostMapping
@@ -45,5 +49,10 @@ class MovieWebAdapter(
         movieDetailUseCase.execute(idx)
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PatchMapping("{movie_id}")
+    fun updateMovie(@PathVariable(name = "movie_id") idx: Int, @RequestBody @Valid updateMovieRequest: UpdateMovieRequest): ResponseEntity<Void> =
+        updateMovieUseCase.execute(idx, movieDataMapper.toDto(updateMovieRequest))
+            .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
 }
