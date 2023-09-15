@@ -7,6 +7,7 @@ import com.project.indistraw.domain.movie.application.port.output.QueryMoviePort
 import com.project.indistraw.domain.movie.domain.Movie
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 
 @Component
@@ -23,6 +24,11 @@ class QueryMoviePersistenceAdapter(
     override fun findAllByGenre(pageRequest: PageRequest, genre: Genre?): Page<Movie> {
         val movieList = movieRepository.findAllByGenre(pageRequest, genre)
         return movieList.map { movieMapper.toDomain(it) }
+    }
+
+    override fun findById(movieIdx: Int): Movie? {
+        val movie = movieRepository.findByIdOrNull(movieIdx)
+        return movieMapper.toDomain(movie)
     }
 
 }
