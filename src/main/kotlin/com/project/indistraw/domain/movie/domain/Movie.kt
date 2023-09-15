@@ -13,7 +13,10 @@ data class Movie(
     val movieUrl: String,
     val thumbnailUrl: String,
     val account: Account,
+    val actor: List<Int>,
+    val director: List<Int>,
     val movieHighLight: List<String>,
-    val genre: Genre?,
+    val genre: List<Genre>?,
+    val clowdTrue: Boolean,
     val createdAt: LocalDateTime
 )
