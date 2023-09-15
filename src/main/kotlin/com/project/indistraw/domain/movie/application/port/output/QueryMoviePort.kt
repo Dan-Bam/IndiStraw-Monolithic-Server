@@ -9,5 +9,6 @@ interface QueryMoviePort {
 
     fun findAll(pageRequest: PageRequest): Page<Movie>
     fun findAllByGenre(pageRequest: PageRequest, genre: Genre?): Page<Movie>
+    fun findById(movieIdx: Int): Movie?
 
 }

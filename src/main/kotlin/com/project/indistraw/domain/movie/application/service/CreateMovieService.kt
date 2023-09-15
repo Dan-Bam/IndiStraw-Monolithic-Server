@@ -30,7 +30,10 @@ class CreateMovieService(
                 movieUrl = it.movieUrl,
                 thumbnailUrl = it.thumbnailUrl,
                 account = account,
-                movieHighLight = dto.movieHighlight,
+                actor = it.actor,
+                director = it.director,
+                clowdTrue = it.clowdTrue,
+                movieHighLight = it.movieHighlight,
                 genre = null,
                 createdAt = LocalDateTime.now()
             )

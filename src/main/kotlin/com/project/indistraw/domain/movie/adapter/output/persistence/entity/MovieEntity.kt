@@ -28,12 +28,22 @@ class MovieEntity(
     val account: AccountEntity,
 
     @ElementCollection
+    @Column(name = "movie_actor")
+    var actor: List<Int>,
+
+    @ElementCollection
+    @Column(name = "movie_director")
+    var director: List<Int>,
+
+    var clowdTrue: Boolean,
+
+    @ElementCollection
     @Column(name = "movie_highlight")
     val movieHighLight: List<String>,
 
+    @ElementCollection
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    var genre: Genre?,
+    val genre: List<Genre>?,
 
     @Column(nullable = false, updatable = false)
     val createdAt: LocalDateTime,
