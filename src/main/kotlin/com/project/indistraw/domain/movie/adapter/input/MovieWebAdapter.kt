@@ -40,8 +40,8 @@ class MovieWebAdapter(
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
-    @GetMapping("{idx}")
-    fun findMovieDetail(@PathVariable idx: Int): ResponseEntity<MovieDetailResponse> =
+    @GetMapping("{movie_id}")
+    fun findMovieDetail(@PathVariable(name = "movie_id") idx: Int): ResponseEntity<MovieDetailResponse> =
         movieDetailUseCase.execute(idx)
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
