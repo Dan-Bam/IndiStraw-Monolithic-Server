@@ -1,5 +1,6 @@
 package com.project.indistraw.domain.movie.adapter.input
 
+import com.project.indistraw.domain.movie.adapter.input.data.request.CreateActorRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieHistoryRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
@@ -39,7 +40,8 @@ class MovieWebAdapter(
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val createMovieHistoryUseCase: CreateMovieHistoryUseCase,
     private val movieHistoryListUseCase: MovieHistoryListUseCase,
-    private val searchActorUseCase: SearchActorUseCase
+    private val searchActorUseCase: SearchActorUseCase,
+    private val createActorUseCase: CreateActorUseCase
 ) {
 
     @PostMapping
@@ -85,5 +87,10 @@ class MovieWebAdapter(
         searchActorUseCase.execute(name)
             ?.map { actorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PostMapping("actor")
+    fun createMovieActor(@RequestBody @Valid createActorRequest: CreateActorRequest): ResponseEntity<ActorResponse> =
+        createActorUseCase.execute(actorDataMapper.toDto(createActorRequest))
+            .let { ResponseEntity.ok(actorDataMapper.toResponse(it)) }
 
 }
