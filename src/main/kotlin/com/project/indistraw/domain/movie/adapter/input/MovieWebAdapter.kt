@@ -3,9 +3,11 @@ package com.project.indistraw.domain.movie.adapter.input
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieHistoryRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
+import com.project.indistraw.domain.movie.adapter.input.data.response.ActorResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieHistoryResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
+import com.project.indistraw.domain.movie.adapter.input.mapper.ActorDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
 import com.project.indistraw.domain.movie.application.port.input.*
@@ -29,13 +31,15 @@ import javax.validation.Valid
 class MovieWebAdapter(
     private val movieDataMapper: MovieDataMapper,
     private val movieHistoryDataMapper: MovieHistoryDataMapper,
+    private val actorDataMapper: ActorDataMapper,
     private val createMovieUseCase: CreateMovieUseCase,
     private val movieListUseCase: MovieListUseCase,
     private val movieDetailUseCase: MovieDetailUseCase,
     private val updateMovieUseCase: UpdateMovieUseCase,
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val createMovieHistoryUseCase: CreateMovieHistoryUseCase,
-    private val movieHistoryListUseCase: MovieHistoryListUseCase
+    private val movieHistoryListUseCase: MovieHistoryListUseCase,
+    private val searchActorUseCase: SearchActorUseCase
 ) {
 
     @PostMapping
@@ -74,6 +78,12 @@ class MovieWebAdapter(
     fun findMovieHistoryList(): ResponseEntity<List<MovieHistoryResponse>> =
         movieHistoryListUseCase.execute()
             .map { movieHistoryDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("actor")
+    fun findMovieActor(@RequestParam name: String): ResponseEntity<List<ActorResponse>> =
+        searchActorUseCase.execute(name)
+            ?.map { actorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
