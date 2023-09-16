@@ -8,12 +8,12 @@ import javax.persistence.Table
 @Entity
 @Table(name = "director")
 class DirectorEntity(
-    @Column(name = "director_idx", nullable = false)
-    override val idx: Int,
+    @Column(name = "director_id", nullable = false)
+    override val id: Int,
 
     @Column(nullable = false)
     val profileUrl: String,
 
     @Column(nullable = false)
     val name: String
-): BaseIdEntity(idx)
+): BaseIdEntity(id)

@@ -5,14 +5,12 @@ import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovie
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
-import com.project.indistraw.domain.movie.application.port.input.CreateMovieUseCase
-import com.project.indistraw.domain.movie.application.port.input.MovieDetailUseCase
-import com.project.indistraw.domain.movie.application.port.input.MovieListUseCase
-import com.project.indistraw.domain.movie.application.port.input.UpdateMovieUseCase
+import com.project.indistraw.domain.movie.application.port.input.*
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -30,7 +28,8 @@ class MovieWebAdapter(
     private val createMovieUseCase: CreateMovieUseCase,
     private val movieListUseCase: MovieListUseCase,
     private val movieDetailUseCase: MovieDetailUseCase,
-    private val updateMovieUseCase: UpdateMovieUseCase
+    private val updateMovieUseCase: UpdateMovieUseCase,
+    private val deleteMovieUseCase: DeleteMovieUseCase
 ) {
 
     @PostMapping
@@ -45,14 +44,19 @@ class MovieWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("{movie_id}")
-    fun findMovieDetail(@PathVariable(name = "movie_id") idx: Int): ResponseEntity<MovieDetailResponse> =
-        movieDetailUseCase.execute(idx)
+    fun findMovieDetail(@PathVariable(name = "movie_id") id: Int): ResponseEntity<MovieDetailResponse> =
+        movieDetailUseCase.execute(id)
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("{movie_id}")
-    fun updateMovie(@PathVariable(name = "movie_id") idx: Int, @RequestBody @Valid updateMovieRequest: UpdateMovieRequest): ResponseEntity<Void> =
-        updateMovieUseCase.execute(idx, movieDataMapper.toDto(updateMovieRequest))
+    fun updateMovie(@PathVariable(name = "movie_id") id: Int, @RequestBody @Valid updateMovieRequest: UpdateMovieRequest): ResponseEntity<Void> =
+        updateMovieUseCase.execute(id, movieDataMapper.toDto(updateMovieRequest))
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+
+    @DeleteMapping("{movie_id}")
+    fun deleteMovie(@PathVariable(name = "movie_id") id: Int): ResponseEntity<Void> =
+        deleteMovieUseCase.execute(id)
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
 }

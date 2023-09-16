@@ -4,6 +4,7 @@ import com.project.indistraw.domain.movie.domain.Movie
 
 interface CommandMoviePort {
 
-    fun createMovie(movie: Movie)
+    fun saveMovie(movie: Movie)
+    fun deleteMovie(movie: Movie)
 
 }

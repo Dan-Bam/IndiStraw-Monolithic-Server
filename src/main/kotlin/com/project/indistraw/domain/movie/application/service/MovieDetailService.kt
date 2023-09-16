@@ -15,8 +15,8 @@ class MovieDetailService(
     private val queryDirectorPort: QueryDirectorPort
 ): MovieDetailUseCase {
 
-    override fun execute(movieIdx: Int): MovieDetailDto {
-        val movie = queryMoviePort.findById(movieIdx) ?: throw MovieNotFoundException()
+    override fun execute(id: Int): MovieDetailDto {
+        val movie = queryMoviePort.findById(id) ?: throw MovieNotFoundException()
 
         return MovieDetailDto(
             title = movie.title,

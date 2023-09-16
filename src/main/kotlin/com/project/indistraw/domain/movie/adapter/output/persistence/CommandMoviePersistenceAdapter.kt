@@ -12,8 +12,12 @@ class CommandMoviePersistenceAdapter(
     private val movieMapper: MovieMapper
 ): CommandMoviePort {
 
-    override fun createMovie(movie: Movie) {
+    override fun saveMovie(movie: Movie) {
         movieRepository.save(movieMapper.toEntity(movie))
+    }
+
+    override fun deleteMovie(movie: Movie) {
+        movieRepository.delete(movieMapper.toEntity(movie))
     }
 
 }

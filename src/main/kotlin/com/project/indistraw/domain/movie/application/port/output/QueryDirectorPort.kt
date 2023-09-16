@@ -4,6 +4,6 @@ import com.project.indistraw.domain.movie.domain.Director
 
 interface QueryDirectorPort {
 
-    fun findById(idx: Int): Director?
+    fun findById(id: Int): Director?
 
 }
