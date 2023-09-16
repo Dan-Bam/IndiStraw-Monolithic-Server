@@ -26,8 +26,8 @@ class QueryMoviePersistenceAdapter(
         return movieList.map { movieMapper.toDomain(it) }
     }
 
-    override fun findById(movieIdx: Int): Movie? {
-        val movie = movieRepository.findByIdOrNull(movieIdx)
+    override fun findById(id: Int): Movie? {
+        val movie = movieRepository.findByIdOrNull(id)
         return movieMapper.toDomain(movie)
     }
 

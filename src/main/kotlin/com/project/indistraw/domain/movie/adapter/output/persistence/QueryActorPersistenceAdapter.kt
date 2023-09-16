@@ -13,8 +13,8 @@ class QueryActorPersistenceAdapter(
     private val actorMapper: ActorMapper
 ): QueryActorPort {
 
-    override fun findById(idx: Int): Actor? {
-        val actor = actorRepository.findByIdOrNull(idx)
+    override fun findById(id: Int): Actor? {
+        val actor = actorRepository.findByIdOrNull(id)
         return actorMapper.toDomain(actor)
     }
 

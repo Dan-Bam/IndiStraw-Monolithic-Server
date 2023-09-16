@@ -13,8 +13,8 @@ class QueryDirectorPersistenceAdapter(
     private val directorMapper: DirectorMapper
 ): QueryDirectorPort {
 
-    override fun findById(idx: Int): Director? {
-        val director = directorRepository.findByIdOrNull(idx)
+    override fun findById(id: Int): Director? {
+        val director = directorRepository.findByIdOrNull(id)
         return directorMapper.toDomain(director)
     }
 
