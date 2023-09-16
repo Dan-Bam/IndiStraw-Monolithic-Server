@@ -16,4 +16,8 @@ class CommandMoviePersistenceAdapter(
         movieRepository.save(movieMapper.toEntity(movie))
     }
 
+    override fun deleteMovie(movie: Movie) {
+        movieRepository.delete(movieMapper.toEntity(movie))
+    }
+
 }
