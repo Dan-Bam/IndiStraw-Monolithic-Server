@@ -18,4 +18,15 @@ class QueryActorPersistenceAdapter(
         return actorMapper.toDomain(actor)
     }
 
+    override fun findByNameContaining(name: String): List<Actor>? {
+        val actorList = actorRepository.findByNameContaining(name)
+        return actorList?.map {
+            Actor(
+                id = it.id,
+                profileUrl = it.profileUrl,
+                name = it.name
+            )
+        }
+    }
+
 }
