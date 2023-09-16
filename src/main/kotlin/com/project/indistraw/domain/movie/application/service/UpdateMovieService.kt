@@ -34,7 +34,7 @@ class UpdateMovieService(
                 )
             }
 
-        commandMoviePort.createMovie(movie)
+        commandMoviePort.saveMovie(movie)
     }
 
 }
