@@ -55,6 +55,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.POST, "/api/v1/movie/history").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/movie/history").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/movie/actor").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
+            .mvcMatchers(HttpMethod.POST, "/api/v1/movie/actor").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
 
             .mvcMatchers(HttpMethod.GET, "/").permitAll()
             .anyRequest().permitAll()
