@@ -4,6 +4,7 @@ import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovie
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
+import com.project.indistraw.domain.movie.adapter.input.data.response.MovieHistoryResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
@@ -33,7 +34,8 @@ class MovieWebAdapter(
     private val movieDetailUseCase: MovieDetailUseCase,
     private val updateMovieUseCase: UpdateMovieUseCase,
     private val deleteMovieUseCase: DeleteMovieUseCase,
-    private val createMovieHistoryUseCase: CreateMovieHistoryUseCase
+    private val createMovieHistoryUseCase: CreateMovieHistoryUseCase,
+    private val movieHistoryListUseCase: MovieHistoryListUseCase
 ) {
 
     @PostMapping
@@ -67,5 +69,11 @@ class MovieWebAdapter(
     fun createMovieHistory(@RequestBody @Valid createMovieHistoryRequest: CreateMovieHistoryRequest): ResponseEntity<Void> =
         createMovieHistoryUseCase.execute(movieHistoryDataMapper.toDto(createMovieHistoryRequest))
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @GetMapping("history")
+    fun findMovieHistoryList(): ResponseEntity<List<MovieHistoryResponse>> =
+        movieHistoryListUseCase.execute()
+            .map { movieHistoryDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
 
 }

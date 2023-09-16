@@ -53,6 +53,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.PATCH, "/api/v1/movie/{movie_id}").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.DELETE, "/api/v1/movie/{movie_id}").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.POST, "/api/v1/movie/history").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/movie/history").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
 
             .mvcMatchers(HttpMethod.GET, "/").permitAll()
             .anyRequest().permitAll()
