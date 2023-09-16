@@ -19,7 +19,7 @@ class UpdateMovieService(
             .let { it ?: throw MovieNotFoundException() }
             .let {
                 Movie(
-                    idx = it.idx,
+                    id = it.id,
                     title = updateMovieDto.title,
                     description = updateMovieDto.description,
                     movieUrl = updateMovieDto.movieUrl,

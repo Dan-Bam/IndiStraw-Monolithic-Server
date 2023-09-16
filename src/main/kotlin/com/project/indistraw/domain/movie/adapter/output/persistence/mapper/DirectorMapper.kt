@@ -9,7 +9,7 @@ class DirectorMapper {
 
     fun toEntity(domain: Director): DirectorEntity =
         DirectorEntity(
-            idx = domain.idx,
+            id = domain.id,
             profileUrl = domain.profileUrl,
             name = domain.name,
         )
@@ -17,7 +17,7 @@ class DirectorMapper {
     fun toDomain(entity: DirectorEntity?): Director? =
         entity?.let {
             Director(
-                idx = entity.idx,
+                id = entity.id,
                 profileUrl = entity.profileUrl,
                 name = entity.name
             )

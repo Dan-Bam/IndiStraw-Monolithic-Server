@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @AggregateRoot
 data class Movie(
-    val idx: Int,
+    val id: Int,
     val title: String,
     val description: String,
     val movieUrl: String,
