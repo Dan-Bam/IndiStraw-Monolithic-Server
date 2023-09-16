@@ -1,10 +1,12 @@
 package com.project.indistraw.domain.movie.adapter.input
 
+import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieHistoryRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
+import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
 import com.project.indistraw.domain.movie.application.port.input.*
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -25,11 +27,13 @@ import javax.validation.Valid
 @RequestMapping("/api/v1/movie")
 class MovieWebAdapter(
     private val movieDataMapper: MovieDataMapper,
+    private val movieHistoryDataMapper: MovieHistoryDataMapper,
     private val createMovieUseCase: CreateMovieUseCase,
     private val movieListUseCase: MovieListUseCase,
     private val movieDetailUseCase: MovieDetailUseCase,
     private val updateMovieUseCase: UpdateMovieUseCase,
-    private val deleteMovieUseCase: DeleteMovieUseCase
+    private val deleteMovieUseCase: DeleteMovieUseCase,
+    private val createMovieHistoryUseCase: CreateMovieHistoryUseCase
 ) {
 
     @PostMapping
@@ -58,5 +62,10 @@ class MovieWebAdapter(
     fun deleteMovie(@PathVariable(name = "movie_id") id: Int): ResponseEntity<Void> =
         deleteMovieUseCase.execute(id)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @PostMapping("history")
+    fun createMovieHistory(@RequestBody @Valid createMovieHistoryRequest: CreateMovieHistoryRequest): ResponseEntity<Void> =
+        createMovieHistoryUseCase.execute(movieHistoryDataMapper.toDto(createMovieHistoryRequest))
+            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
 }
