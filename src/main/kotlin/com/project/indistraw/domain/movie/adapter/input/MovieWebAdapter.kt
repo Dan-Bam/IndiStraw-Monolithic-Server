@@ -40,7 +40,8 @@ class MovieWebAdapter(
     private val createActorUseCase: CreateActorUseCase,
     private val searchActorIdUseCase: SearchActorIdUseCase,
     private val searchDirectorUseCase: SearchDirectorUseCase,
-    private val createDirectorUseCase: CreateDirectorUseCase
+    private val createDirectorUseCase: CreateDirectorUseCase,
+    private val searchDirectorIdUseCase: SearchDirectorIdUseCase
 ) {
 
     @PostMapping
@@ -108,5 +109,11 @@ class MovieWebAdapter(
     fun createMovieDirector(@RequestBody @Valid createDirectorRequest: CreateDirectorRequest): ResponseEntity<DirectorResponse> =
         createDirectorUseCase.execute(directorDataMapper.toDto(createDirectorRequest))
             .let { ResponseEntity.ok(directorDataMapper.toResponse(it)) }
+
+    @GetMapping("director/{idx}")
+    fun findMovieDirectorById(@PathVariable idx: Int): ResponseEntity<DirectorIdResponse> =
+        searchDirectorIdUseCase.execute(idx)
+            .let { directorDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
 
 }
