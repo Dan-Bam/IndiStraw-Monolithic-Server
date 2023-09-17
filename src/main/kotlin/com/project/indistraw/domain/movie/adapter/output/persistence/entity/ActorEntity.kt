@@ -1,9 +1,7 @@
 package com.project.indistraw.domain.movie.adapter.output.persistence.entity
 
 import com.project.indistraw.common.entity.BaseIdEntity
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "actor")
