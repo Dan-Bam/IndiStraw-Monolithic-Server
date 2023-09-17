@@ -6,6 +6,7 @@ import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovie
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.response.*
 import com.project.indistraw.domain.movie.adapter.input.mapper.ActorDataMapper
+import com.project.indistraw.domain.movie.adapter.input.mapper.DirectorDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
 import com.project.indistraw.domain.movie.application.port.input.*
@@ -30,6 +31,7 @@ class MovieWebAdapter(
     private val movieDataMapper: MovieDataMapper,
     private val movieHistoryDataMapper: MovieHistoryDataMapper,
     private val actorDataMapper: ActorDataMapper,
+    private val directorDataMapper: DirectorDataMapper,
     private val createMovieUseCase: CreateMovieUseCase,
     private val movieListUseCase: MovieListUseCase,
     private val movieDetailUseCase: MovieDetailUseCase,
@@ -39,7 +41,8 @@ class MovieWebAdapter(
     private val movieHistoryListUseCase: MovieHistoryListUseCase,
     private val searchActorUseCase: SearchActorUseCase,
     private val createActorUseCase: CreateActorUseCase,
-    private val searchActorIdUseCase: SearchActorIdUseCase
+    private val searchActorIdUseCase: SearchActorIdUseCase,
+    private val searchDirectorUseCase: SearchDirectorUseCase
 ) {
 
     @PostMapping
@@ -95,6 +98,12 @@ class MovieWebAdapter(
     fun findMovieActorById(@PathVariable idx: Int): ResponseEntity<ActorIdResponse> =
         searchActorIdUseCase.execute(idx)
             .let { actorDataMapper.toResponse(it)  }
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("director")
+    fun findMovieDirector(@RequestParam name: String): ResponseEntity<List<DirectorResponse>> =
+        searchDirectorUseCase.execute(name)
+            ?.map { directorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }
