@@ -26,6 +26,11 @@ class QueryMoviePersistenceAdapter(
         return movieList.map { movieMapper.toDomain(it)!! }
     }
 
+    override fun findByMovieContaining(directorId: Int): List<Movie> {
+        val movieList = movieRepository.findByDirectorContaining(directorId)
+        return movieList.map { movieMapper.toDomain(it)!! }
+    }
+
     override fun findAllByGenre(pageRequest: PageRequest, genre: Genre?): Page<Movie> {
         val movieList = movieRepository.findAllByGenre(pageRequest, genre)
         return movieList.map { movieMapper.toDomain(it) }

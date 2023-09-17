@@ -10,5 +10,6 @@ interface MovieRepository: JpaRepository<MovieEntity, Int> {
 
     fun findAllByGenre(pageable: Pageable, genre: Genre?): Page<MovieEntity>
     fun findByActorContaining(actorId: Int): List<MovieEntity>
+    fun findByDirectorContaining(directorId: Int): List<MovieEntity>
 
 }
