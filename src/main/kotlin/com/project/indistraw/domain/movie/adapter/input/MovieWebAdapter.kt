@@ -4,10 +4,7 @@ import com.project.indistraw.domain.movie.adapter.input.data.request.CreateActor
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieHistoryRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
-import com.project.indistraw.domain.movie.adapter.input.data.response.ActorResponse
-import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
-import com.project.indistraw.domain.movie.adapter.input.data.response.MovieHistoryResponse
-import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
+import com.project.indistraw.domain.movie.adapter.input.data.response.*
 import com.project.indistraw.domain.movie.adapter.input.mapper.ActorDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
@@ -41,7 +38,8 @@ class MovieWebAdapter(
     private val createMovieHistoryUseCase: CreateMovieHistoryUseCase,
     private val movieHistoryListUseCase: MovieHistoryListUseCase,
     private val searchActorUseCase: SearchActorUseCase,
-    private val createActorUseCase: CreateActorUseCase
+    private val createActorUseCase: CreateActorUseCase,
+    private val searchActorIdUseCase: SearchActorIdUseCase
 ) {
 
     @PostMapping
@@ -92,5 +90,11 @@ class MovieWebAdapter(
     fun createMovieActor(@RequestBody @Valid createActorRequest: CreateActorRequest): ResponseEntity<ActorResponse> =
         createActorUseCase.execute(actorDataMapper.toDto(createActorRequest))
             .let { ResponseEntity.ok(actorDataMapper.toResponse(it)) }
+
+    @GetMapping("actor/{idx}")
+    fun findMovieActorById(@PathVariable idx: Int): ResponseEntity<ActorIdResponse> =
+        searchActorIdUseCase.execute(idx)
+            .let { actorDataMapper.toResponse(it)  }
+            .let { ResponseEntity.ok(it) }
 
 }

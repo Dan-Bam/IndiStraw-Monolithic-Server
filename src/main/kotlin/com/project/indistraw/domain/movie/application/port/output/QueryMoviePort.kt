@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest
 interface QueryMoviePort {
 
     fun findAll(pageRequest: PageRequest): Page<Movie>
+    fun findByActorContaining(actorId: Int): List<Movie>
     fun findAllByGenre(pageRequest: PageRequest, genre: Genre?): Page<Movie>
     fun findById(id: Int): Movie?
 

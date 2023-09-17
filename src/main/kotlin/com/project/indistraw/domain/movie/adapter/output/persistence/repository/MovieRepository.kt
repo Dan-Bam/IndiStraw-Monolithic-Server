@@ -9,5 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface MovieRepository: JpaRepository<MovieEntity, Int> {
 
     fun findAllByGenre(pageable: Pageable, genre: Genre?): Page<MovieEntity>
+    fun findByActorContaining(actorId: Int): List<MovieEntity>
 
 }
