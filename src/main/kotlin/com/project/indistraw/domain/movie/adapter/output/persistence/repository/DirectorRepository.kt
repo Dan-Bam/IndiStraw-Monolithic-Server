@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface DirectorRepository: CrudRepository<DirectorEntity, Int> {
     fun findByNameContaining(name: String): List<DirectorEntity>?
+    fun save(directorEntity: DirectorEntity): DirectorEntity
 }

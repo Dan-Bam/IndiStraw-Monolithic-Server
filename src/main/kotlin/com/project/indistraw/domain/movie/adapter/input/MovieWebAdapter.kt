@@ -1,9 +1,6 @@
 package com.project.indistraw.domain.movie.adapter.input
 
-import com.project.indistraw.domain.movie.adapter.input.data.request.CreateActorRequest
-import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieHistoryRequest
-import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
-import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
+import com.project.indistraw.domain.movie.adapter.input.data.request.*
 import com.project.indistraw.domain.movie.adapter.input.data.response.*
 import com.project.indistraw.domain.movie.adapter.input.mapper.ActorDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.DirectorDataMapper
@@ -42,7 +39,8 @@ class MovieWebAdapter(
     private val searchActorUseCase: SearchActorUseCase,
     private val createActorUseCase: CreateActorUseCase,
     private val searchActorIdUseCase: SearchActorIdUseCase,
-    private val searchDirectorUseCase: SearchDirectorUseCase
+    private val searchDirectorUseCase: SearchDirectorUseCase,
+    private val createDirectorUseCase: CreateDirectorUseCase
 ) {
 
     @PostMapping
@@ -105,5 +103,10 @@ class MovieWebAdapter(
         searchDirectorUseCase.execute(name)
             ?.map { directorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PostMapping("director")
+    fun createMovieDirector(@RequestBody @Valid createDirectorRequest: CreateDirectorRequest): ResponseEntity<DirectorResponse> =
+        createDirectorUseCase.execute(directorDataMapper.toDto(createDirectorRequest))
+            .let { ResponseEntity.ok(directorDataMapper.toResponse(it)) }
 
 }
