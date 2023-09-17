@@ -20,6 +20,7 @@ class CreateActorService(
                 name = createActorDto.name
             )
         )
+
         return ActorDto(
             id = actor.id,
             profileUrl = actor.profileUrl,
