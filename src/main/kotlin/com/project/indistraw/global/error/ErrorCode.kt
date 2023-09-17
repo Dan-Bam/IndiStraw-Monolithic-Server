@@ -23,6 +23,9 @@ enum class ErrorCode(
     // ACTOR
     ACTOR_NOT_FOUND("존재하지 않는 배우입니다.", 404),
 
+    // DIRECTOR
+    DIRECTOR_NOT_FOUND("존재하지 않는 감독입니다.", 404),
+
     // AUTHENTICATION
     AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", 404),
     TOO_MANY_AUTHENTICATION_REQUEST("인증 메세지 요청을 5번 초과 한 사용자 입니다.", 429),
