@@ -4,6 +4,6 @@ import com.project.indistraw.domain.movie.adapter.output.persistence.entity.Dire
 import org.springframework.data.repository.CrudRepository
 
 interface DirectorRepository: CrudRepository<DirectorEntity, Int> {
-    fun findByNameContaining(name: String): List<DirectorEntity>?
+    fun findByNameContaining(name: String): List<DirectorEntity>
     fun save(directorEntity: DirectorEntity): DirectorEntity
 }

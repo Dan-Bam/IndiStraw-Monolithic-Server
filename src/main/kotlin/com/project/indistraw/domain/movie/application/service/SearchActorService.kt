@@ -9,9 +9,10 @@ import com.project.indistraw.domain.movie.application.port.output.QueryActorPort
 class SearchActorService(
     private val queryActorPort: QueryActorPort
 ): SearchActorUseCase{
+
     override fun execute(name: String): List<ActorDto>? =
         queryActorPort.findByNameContaining(name)
-            ?.map {
+            .map {
                 ActorDto(
                     id = it.id,
                     name = it.name,
