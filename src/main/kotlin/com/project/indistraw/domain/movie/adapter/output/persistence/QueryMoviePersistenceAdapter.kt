@@ -32,13 +32,27 @@ class QueryMoviePersistenceAdapter(
     }
 
     override fun findAllByGenre(pageRequest: PageRequest, genre: Genre?): Page<Movie> {
-        val movieList = movieRepository.findAllByGenre(pageRequest, genre)
+        val movieList = movieRepository.findByGenre(pageRequest, genre)
         return movieList.map { movieMapper.toDomain(it) }
+    }
+
+    override fun findByGenre(genre: Genre): List<Movie> {
+        val movieList = movieRepository.findByGenre(genre)
+        return movieList.map { movieMapper.toDomain(it)!! }
     }
 
     override fun findById(id: Int): Movie? {
         val movie = movieRepository.findByIdOrNull(id)
         return movieMapper.toDomain(movie)
+    }
+
+    override fun findByTitleContaining(keyword: String): List<String> {
+        val movie = movieRepository.findByTitleContaining(keyword)
+        return movie.map { it.title }
+    }
+
+    override fun existsByGenre(genre: Genre?): Boolean {
+        return movieRepository.existsByGenre(genre)
     }
 
 }

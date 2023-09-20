@@ -18,9 +18,9 @@ class QueryDirectorPersistenceAdapter(
         return directorMapper.toDomain(director)
     }
 
-    override fun findByNameContaining(name: String): List<Director>? {
+    override fun findByNameContaining(name: String): List<Director> {
         val director = directorRepository.findByNameContaining(name)
-        return director?.map { directorMapper.toDomain(it)!! }
+        return director.map { directorMapper.toDomain(it)!! }
     }
 
 }
