@@ -1,5 +1,6 @@
 package com.project.indistraw.domain.movie.application.port.input.dto
 
+import com.project.indistraw.domain.movie.adapter.output.persistence.entity.Genre
 import com.project.indistraw.domain.movie.domain.Actor
 import com.project.indistraw.domain.movie.domain.Director
 
@@ -12,5 +13,5 @@ data class MovieDetailDto(
     val actor: List<Actor?>,
     val movieHighLight: List<String>,
     val clowdTrue: Boolean,
-    val genre: List<String>?
+    val genre: Genre
 )

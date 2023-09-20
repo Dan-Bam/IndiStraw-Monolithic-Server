@@ -16,7 +16,7 @@ data class Movie(
     val actor: List<Int>,
     val director: List<Int>,
     val movieHighLight: List<String>,
-    val genre: List<Genre>?,
+    val genre: Genre,
     val clowdTrue: Boolean,
     val createdAt: LocalDateTime
 )
