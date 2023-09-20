@@ -53,6 +53,11 @@ class QueryCrowdfundingPersistenceAdapter(
         return PageImpl(crowdfundingList.toList(), crowdfundingEntityList.pageable, crowdfundingEntityList.size.toLong())
     }
 
+    override fun findByTitleContaining(keyword: String): List<Crowdfunding> {
+        val crowdfundingList = crowdfundingRepository.findByTitleContaining(keyword)
+        return crowdfundingList.map { (crowdfundingMapper toDomain it)!! }
+    }
+
     private fun eqKeyword(keyword: String?): BooleanExpression? {
         if (keyword == null) return null
         return QCrowdfundingEntity.crowdfundingEntity.title.like("%$keyword$").or(QCrowdfundingEntity.crowdfundingEntity.description.like("%$keyword$"))

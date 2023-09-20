@@ -41,9 +41,8 @@ class MovieEntity(
     @Column(name = "movie_highlight")
     val movieHighLight: List<String>,
 
-    @ElementCollection
     @Enumerated(EnumType.STRING)
-    val genre: List<Genre>?,
+    val genre: Genre,
 
     @Column(nullable = false, updatable = false)
     val createdAt: LocalDateTime,

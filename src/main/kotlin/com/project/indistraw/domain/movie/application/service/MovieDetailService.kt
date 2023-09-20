@@ -27,7 +27,7 @@ class MovieDetailService(
             actor = movie.actor.map { queryActorPort.findById(it) },
             movieHighLight = movie.movieHighLight,
             clowdTrue = movie.clowdTrue,
-            genre = movie.genre?.map { it.toString() }
+            genre = movie.genre
         )
     }
 

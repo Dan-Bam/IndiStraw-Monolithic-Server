@@ -4,6 +4,7 @@ import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.S
 import com.project.indistraw.domain.account.application.exception.AccountNotFoundException
 import com.project.indistraw.domain.account.application.port.output.AccountSecurityPort
 import com.project.indistraw.domain.account.application.port.output.QueryAccountPort
+import com.project.indistraw.domain.movie.adapter.output.persistence.entity.Genre
 import com.project.indistraw.domain.movie.application.port.input.CreateMovieUseCase
 import com.project.indistraw.domain.movie.application.port.input.dto.CreateMovieDto
 import com.project.indistraw.domain.movie.application.port.output.CommandMoviePort
@@ -34,7 +35,7 @@ class CreateMovieService(
                 director = it.director,
                 clowdTrue = it.clowdTrue,
                 movieHighLight = it.movieHighlight,
-                genre = null,
+                genre = Genre.All,
                 createdAt = LocalDateTime.now()
             )
         }
