@@ -12,5 +12,6 @@ interface CrowdfundingRepository: JpaRepository<CrowdfundingEntity, Long> {
     fun findTop5ByStatusTypeNotOrderByViewCountDesc(statusType: Crowdfunding.StatusType): List<CrowdfundingEntity>
     fun findByWriterIdx(writerIdx: UUID): List<CrowdfundingEntity>
     fun findAllByStatusTypeNot(statusType: Crowdfunding.StatusType, pageable: Pageable): Page<CrowdfundingEntity>
+    fun findByTitleContaining(keyword: String): List<CrowdfundingEntity>
 
 }
