@@ -82,6 +82,9 @@ dependencies {
 
 	/* boot pay */
 	implementation("io.github.bootpay:backend:2.1.4")
+
+	/* aws */
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 }
 
 tasks.withType<KotlinCompile> {
