@@ -17,6 +17,9 @@ enum class ErrorCode(
     AUTH_CODE_NOT_MATCH("인증 코드가 일치 하지 않습니다.", 400),
     TOO_MANY_AUTH_CODE_REQUEST("인증 코드 확인 요청을 5번 초과 한 사용자 입니다.", 429),
 
+    // AWS_S3
+    NOT_VALID_EXTENSION("존재하지 않은 확장자 입니다", 415),
+
     // MOVIE
     MOVIE_NOT_FOUND("존재하지 않는 영화입니다.", 404),
 
