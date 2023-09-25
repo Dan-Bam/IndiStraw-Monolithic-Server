@@ -19,6 +19,11 @@ spring:
       hibernate:
         format_sql: true
 
+  servlet:
+    multipart:
+      max-file-size: 5000MB
+      max-request-size: 5000MB
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -38,3 +43,15 @@ coolsms:
 bootpay:
   rest-application-id: ${REST_APPLICATION_ID}
   private-key: ${PRIVATE_KEY}
+
+cloud:
+  aws:
+    s3:
+      bucket: ${S3_BUCKET}
+    region:
+      static: ${S3_REGION}
+    stack:
+      auto: false
+    credentials:
+      access-key: ${S3_ACCESS_KEY}
+      secret-key: ${S3_SECRET_KEY}
