@@ -1,0 +1,94 @@
+name: CD
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: danbam/indistraw-monolithic
+          stage: main
+          yaml: >
+            name: indistraw-monolithic-server
+
+            app: java@11
+
+            options:
+              ports: 8080
+              env:
+                - name: COOLSMS_ACCESS
+                  value: ${{ secrets.COOLSMS_ACCESS }}
+                - name: PROFILE
+                  value: ${{ secrets.PROFILE }}
+                - name: COOLSMS_PHONE_NUMBER
+                  value: ${{ secrets.COOLSMS_PHONE_NUMBER }}
+                - name: COOLSMS_SECRET
+                  value: ${{ secrets.COOLSMS_SECRET }}
+                - name: DB_DRIVER
+                  value: ${{ secrets.DB_DRIVER }}
+                - name: DB_URL
+                  value: ${{ secrets.DB_URL }}
+                - name: DB_USERNAME
+                  value: ${{ secrets.DB_USERNAME }}
+                - name: DB_PASSWORD
+                  value: ${{ secrets.DB_PASSWORD }}
+                - name: DB_PLATFORM
+                  value: ${{ secrets.DB_PLATFORM }}
+                - name: JPA_DDL_AUTO
+                  value: ${{ secrets.JPA_DDL_AUTO }}
+                - name: JWT_ACCESS_EXP
+                  value: ${{ secrets.JWT_ACCESS_EXP }}
+                - name: JWT_ACCESS_SECRET
+                  value: ${{ secrets.JWT_ACCESS_SECRET }}
+                - name: JWT_REFRESH_EXP
+                  value: ${{ secrets.JWT_REFRESH_EXP }}
+                - name: JWT_REFRESH_SECRET
+                  value: ${{ secrets.JWT_REFRESH_SECRET }}
+                - name: PRIVATE_KEY
+                  value: ${{ secrets.PRIVATE_KEY }}
+                - name: REST_APPLICATION_ID
+                  value: ${{ secrets.REST_APPLICATION_ID }}
+                - name: REDIS_HOST
+                  value: ${{ secrets.REDIS_HOST }}
+                - name: REDIS_PORT
+                  value: ${{ secrets.REDIS_PORT }}
+                - name: S3_ACCESS_KEY
+                  value: ${{ secrets.S3_ACCESS_KEY }}
+                - name: S3_BUCKET
+                  value: ${{ secrets.S3_BUCKET }}
+                - name: S3_REGION
+                  value: ${{ secrets.S3_REGION }}
+                - name: S3_SECRET_KEY
+                  value: ${{ secrets.S3_SECRET_KEY }}
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
+
+      - name: IndiStraw CD success Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ success() }}
+        with:
+          title: 🎉 IndiStraw Server CD success 🎉
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: 00FF00
+
+      - name: IndiStraw CD failure Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ failure() }}
+        with:
+          title: ❌ IndiStraw Server CD failed ❌
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: FF0000
