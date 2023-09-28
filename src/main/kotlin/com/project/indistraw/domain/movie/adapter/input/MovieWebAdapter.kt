@@ -7,7 +7,8 @@ import com.project.indistraw.domain.movie.adapter.input.mapper.DirectorDataMappe
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
 import com.project.indistraw.domain.movie.application.port.input.*
-import com.project.indistraw.domain.movie.application.service.PopularTagListService
+import com.project.indistraw.domain.search.application.port.input.SearchMovieUseCase
+import com.project.indistraw.domain.search.application.service.PopularTagListService
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
@@ -118,16 +119,5 @@ class MovieWebAdapter(
         searchDirectorIdUseCase.execute(idx)
             .let { directorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
-
-    @GetMapping("search")
-    fun findMovieData(@RequestParam(name = "keyword") keyword: String): ResponseEntity<List<String>> =
-        searchMovieUseCase.execute(keyword)
-            .let { ResponseEntity.ok(it) }
-
-    @GetMapping("tag")
-    fun findPopularTag(): ResponseEntity<List<Map<String, String>>> {
-        val let = popularTagListService.execute()
-        return ResponseEntity.ok(let.map { mapOf("tag_list" to it) })
-    }
 
 }
