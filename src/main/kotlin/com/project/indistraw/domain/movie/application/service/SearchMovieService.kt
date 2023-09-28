@@ -7,14 +7,15 @@ import com.project.indistraw.domain.movie.application.port.input.SearchMovieUseC
 import com.project.indistraw.domain.movie.application.port.output.QueryActorPort
 import com.project.indistraw.domain.movie.application.port.output.QueryDirectorPort
 import com.project.indistraw.domain.movie.application.port.output.QueryMoviePort
-import com.project.indistraw.domain.movie.domain.Movie
+import org.springframework.data.redis.core.RedisTemplate
 
 @ServiceWithReadOnlyTransaction
 class SearchMovieService(
     private val queryMoviePort: QueryMoviePort,
     private val queryActorPort: QueryActorPort,
     private val queryDirectorPort: QueryDirectorPort,
-    private val queryCrowdfundingPort: QueryCrowdfundingPort
+    private val queryCrowdfundingPort: QueryCrowdfundingPort,
+    private val redisTemplate: RedisTemplate<String, String>
 ): SearchMovieUseCase {
 
     override fun execute(keyword: String): List<String> {
@@ -22,19 +23,29 @@ class SearchMovieService(
         val actorList = queryActorPort.findByNameContaining(keyword)
         val directorList = queryDirectorPort.findByNameContaining(keyword)
         val crowdfundingList = queryCrowdfundingPort.findByTitleContaining(keyword)
-        var movieListByGenre: List<Movie>
         val genre = keyword.toGenre()
 
-        return if (queryMoviePort.existsByGenre(genre)) {
-            movieListByGenre = genre?.let { queryMoviePort.findByGenre(it) }!!
-            (actorList.map { it.name } + directorList.map { it.name }) +
-                    (movieListByGenre.map { it.title } + movieList.map { it }).distinct() +
-                    (crowdfundingList.map { it.title })
+        val result = if (queryMoviePort.existsByGenre(genre)) {
+            val movieListByGenre = queryMoviePort.findByGenre(genre!!)
+            val uniqueMovieTitles = (movieListByGenre.map { it.title } + movieList.map { it }).distinct()
+            val allNames = (actorList.map { it.name } + directorList.map { it.name })
+            val allTitles = (uniqueMovieTitles + crowdfundingList.map { it.title })
+            val combinedResult = allNames + allTitles
+            saveSearchResultToRedis(keyword)
+            combinedResult
         } else {
-            (actorList.map { it.name } + directorList.map { it.name }) +
-                    (movieList.map { it }) +
-                    (crowdfundingList.map { it.title })
+            val allNames = (actorList.map { it.name } + directorList.map { it.name })
+            val allTitles = (movieList.map { it } + crowdfundingList.map { it.title })
+            val combinedResult = allNames + allTitles
+            saveSearchResultToRedis(keyword)
+            combinedResult
         }
+
+        return result
+    }
+
+    private fun saveSearchResultToRedis(keyword: String) {
+        redisTemplate.opsForZSet().incrementScore("ranking", keyword, 1.0);
     }
 
 }
