@@ -1,4 +1,4 @@
-package com.project.indistraw.domain.movie.application.port.input
+package com.project.indistraw.domain.search.application.port.input
 
 interface SearchMovieUseCase {
 
