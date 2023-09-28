@@ -12,7 +12,7 @@ class SearchDirectorService(
 
     override fun execute(name: String): List<DirectorDto>? =
         commandDirectorPort.findByNameContaining(name)
-            ?.map {
+            .map {
                 DirectorDto(
                     id = it.id,
                     name = it.name,
