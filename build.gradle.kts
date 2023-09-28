@@ -64,6 +64,7 @@ dependencies {
 	/* DB */
 	implementation("mysql:mysql-connector-java:8.0.32")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("io.lettuce:lettuce-core:6.1.5.RELEASE")
 	implementation("org.mariadb.jdbc:mariadb-java-client:3.1.2")
 
 	/* validation */
