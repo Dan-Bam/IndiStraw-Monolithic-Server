@@ -6,6 +6,6 @@ import com.project.indistraw.domain.movie.adapter.output.persistence.entity.Movi
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface MovieHistoryRepository: JpaRepository<MovieHistoryEntity, Int> {
-    fun findByMovie(movie: MovieEntity): MovieHistoryEntity?
+    fun findByMovieAndAccount(movie: MovieEntity, account: AccountEntity): MovieHistoryEntity?
     fun findByAccount(account: AccountEntity): List<MovieHistoryEntity>?
 }

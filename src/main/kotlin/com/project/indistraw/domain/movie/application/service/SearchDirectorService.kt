@@ -10,7 +10,7 @@ class SearchDirectorService(
     private val commandDirectorPort: QueryDirectorPort
 ): SearchDirectorUseCase {
 
-    override fun execute(name: String): List<DirectorDto>? =
+    override fun execute(name: String): List<DirectorDto> =
         commandDirectorPort.findByNameContaining(name)
             .map {
                 DirectorDto(
