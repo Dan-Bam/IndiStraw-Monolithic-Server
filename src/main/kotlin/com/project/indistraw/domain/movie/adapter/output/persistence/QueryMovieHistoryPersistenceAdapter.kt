@@ -18,8 +18,8 @@ class QueryMovieHistoryPersistenceAdapter(
     private val movieHistoryRepository: MovieHistoryRepository
 ): QueryMovieHistoryPort {
 
-    override fun findByMovie(movie: Movie): MovieHistory? {
-        val movieHistory = movieHistoryRepository.findByMovie(movieMapper.toEntity(movie))
+    override fun findByMovieAndAccount(movie: Movie, account: Account): MovieHistory? {
+        val movieHistory = movieHistoryRepository.findByMovieAndAccount(movieMapper.toEntity(movie), accountMapper.toEntity(account))
         return movieHistoryMapper.toDomain(movieHistory)
     }
 

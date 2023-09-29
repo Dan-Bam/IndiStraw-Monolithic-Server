@@ -19,13 +19,13 @@ class CreateMovieHistoryService(
     private val queryMovieHistoryPort: QueryMovieHistoryPort,
     private val securityPort: AccountSecurityPort,
     private val queryAccountPort: QueryAccountPort
-) : CreateMovieHistoryUseCase {
+): CreateMovieHistoryUseCase {
 
     override fun execute(createMovieHistoryDto: CreateMovieHistoryDto) {
         val accountIdx = securityPort.getCurrentAccountIdx()
         val account = queryAccountPort.findByIdxOrNull(accountIdx) ?: throw AccountNotFoundException()
         val movie = queryMoviePort.findById(createMovieHistoryDto.movieId) ?: throw MovieNotFoundException()
-        val movieHistory = queryMovieHistoryPort.findByMovie(movie) ?:
+        val movieHistory = queryMovieHistoryPort.findByMovieAndAccount(movie, account) ?:
             MovieHistory(
                 id = 0,
                 movie = movie,
@@ -33,7 +33,7 @@ class CreateMovieHistoryService(
                 historyTime = createMovieHistoryDto.historyTime
             )
 
-        commandMovieHistoryPort.saveMovieHistory(movieHistory.updateHistory(createMovieHistoryDto.historyTime))
+        commandMovieHistoryPort.saveMovieHistory(movieHistory.copy(historyTime = createMovieHistoryDto.historyTime))
     }
 
 }

@@ -6,7 +6,7 @@ import com.project.indistraw.domain.movie.domain.MovieHistory
 
 interface QueryMovieHistoryPort {
 
-    fun findByMovie(movie: Movie): MovieHistory?
+    fun findByMovieAndAccount(movie: Movie, account: Account): MovieHistory?
     fun findByAccount(account: Account): List<MovieHistory>?
 
 }
