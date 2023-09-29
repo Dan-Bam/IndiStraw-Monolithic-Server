@@ -10,7 +10,7 @@ class SearchActorService(
     private val queryActorPort: QueryActorPort
 ): SearchActorUseCase{
 
-    override fun execute(name: String): List<ActorDto>? =
+    override fun execute(name: String): List<ActorDto> =
         queryActorPort.findByNameContaining(name)
             .map {
                 ActorDto(
