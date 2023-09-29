@@ -9,11 +9,4 @@ data class MovieHistory(
     val movie: Movie,
     val account: Account,
     var historyTime: Float
-) {
-
-    fun updateHistory(historyTime: Float): MovieHistory {
-        this.historyTime = historyTime
-        return this
-    }
-
-}
+)
