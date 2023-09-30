@@ -21,8 +21,8 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 5000MB
-      max-request-size: 5000MB
+      max-file-size: ${MAX_FILE_SIZE}
+      max-request-size: ${MAX-REQUEST-SIZE}
 
   mvc:
     pathmatch:
