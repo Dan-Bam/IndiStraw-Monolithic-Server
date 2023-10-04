@@ -57,20 +57,20 @@ class MovieWebAdapter(
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
-    @GetMapping("{movie_id}")
-    fun findMovieDetail(@PathVariable(name = "movie_id") id: Int): ResponseEntity<MovieDetailResponse> =
-        movieDetailUseCase.execute(id)
+    @GetMapping("{idx}")
+    fun findMovieDetail(@PathVariable(name = "idx") idx: Long): ResponseEntity<MovieDetailResponse> =
+        movieDetailUseCase.execute(idx)
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
-    @PatchMapping("{movie_id}")
-    fun updateMovie(@PathVariable(name = "movie_id") id: Int, @RequestBody @Valid updateMovieRequest: UpdateMovieRequest): ResponseEntity<Void> =
-        updateMovieUseCase.execute(id, movieDataMapper.toDto(updateMovieRequest))
+    @PatchMapping("{idx}")
+    fun updateMovie(@PathVariable(name = "idx") idx: Long, @RequestBody @Valid updateMovieRequest: UpdateMovieRequest): ResponseEntity<Void> =
+        updateMovieUseCase.execute(idx, movieDataMapper.toDto(updateMovieRequest))
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
-    @DeleteMapping("{movie_id}")
-    fun deleteMovie(@PathVariable(name = "movie_id") id: Int): ResponseEntity<Void> =
-        deleteMovieUseCase.execute(id)
+    @DeleteMapping("{idx}")
+    fun deleteMovie(@PathVariable(name = "idx") idx: Long): ResponseEntity<Void> =
+        deleteMovieUseCase.execute(idx)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @PostMapping("history")
@@ -96,7 +96,7 @@ class MovieWebAdapter(
             .let { ResponseEntity.ok(actorDataMapper.toResponse(it)) }
 
     @GetMapping("actor/{idx}")
-    fun findMovieActorById(@PathVariable idx: Int): ResponseEntity<ActorIdResponse> =
+    fun findMovieActorById(@PathVariable idx: Long): ResponseEntity<ActorIdResponse> =
         searchActorIdUseCase.execute(idx)
             .let { actorDataMapper.toResponse(it)  }
             .let { ResponseEntity.ok(it) }
@@ -113,7 +113,7 @@ class MovieWebAdapter(
             .let { ResponseEntity.ok(directorDataMapper.toResponse(it)) }
 
     @GetMapping("director/{idx}")
-    fun findMovieDirectorById(@PathVariable idx: Int): ResponseEntity<DirectorIdResponse> =
+    fun findMovieDirectorById(@PathVariable idx: Long): ResponseEntity<DirectorIdResponse> =
         searchDirectorIdUseCase.execute(idx)
             .let { directorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }

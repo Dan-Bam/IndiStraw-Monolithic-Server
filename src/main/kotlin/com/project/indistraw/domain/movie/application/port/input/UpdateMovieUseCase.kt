@@ -4,6 +4,6 @@ import com.project.indistraw.domain.movie.application.port.input.dto.UpdateMovie
 
 interface UpdateMovieUseCase {
 
-    fun execute(id: Int, updateMovieDto: UpdateMovieDto)
+    fun execute(idx: Long, updateMovieDto: UpdateMovieDto)
 
 }

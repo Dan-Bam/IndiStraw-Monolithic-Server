@@ -14,7 +14,7 @@ class SearchDirectorService(
         commandDirectorPort.findByNameContaining(name)
             .map {
                 DirectorDto(
-                    id = it.id,
+                    idx = it.idx,
                     name = it.name,
                     profileUrl = it.profileUrl
                 )

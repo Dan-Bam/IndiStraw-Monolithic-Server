@@ -24,10 +24,10 @@ class CreateMovieHistoryService(
     override fun execute(createMovieHistoryDto: CreateMovieHistoryDto) {
         val accountIdx = securityPort.getCurrentAccountIdx()
         val account = queryAccountPort.findByIdxOrNull(accountIdx) ?: throw AccountNotFoundException()
-        val movie = queryMoviePort.findById(createMovieHistoryDto.movieId) ?: throw MovieNotFoundException()
+        val movie = queryMoviePort.findById(createMovieHistoryDto.movieIdx) ?: throw MovieNotFoundException()
         val movieHistory = queryMovieHistoryPort.findByMovieAndAccount(movie, account) ?:
             MovieHistory(
-                id = 0,
+                idx = 0L,
                 movie = movie,
                 account = account,
                 historyTime = createMovieHistoryDto.historyTime

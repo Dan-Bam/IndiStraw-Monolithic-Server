@@ -14,7 +14,7 @@ class SearchActorService(
         queryActorPort.findByNameContaining(name)
             .map {
                 ActorDto(
-                    id = it.id,
+                    idx = it.idx,
                     name = it.name,
                     profileUrl = it.profileUrl
                 )

@@ -11,7 +11,7 @@ class MovieHistoryDataMapper {
 
     fun toDto(request: CreateMovieHistoryRequest): CreateMovieHistoryDto =
         CreateMovieHistoryDto(
-            movieId = request.movieId,
+            movieIdx = request.movieIdx,
             historyTime = request.historyTime
         )
 
@@ -20,7 +20,7 @@ class MovieHistoryDataMapper {
             title = dto.title,
             thumbnailUrl = dto.thumbnailUrl,
             historyTime = dto.historyTime,
-            movieId = dto.movieId
+            movieIdx = dto.movieIdx
         )
 
 }

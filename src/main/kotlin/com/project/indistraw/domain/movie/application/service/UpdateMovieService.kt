@@ -14,12 +14,12 @@ class UpdateMovieService(
     private val commandMoviePort: CommandMoviePort
 ): UpdateMovieUseCase {
 
-    override fun execute(id: Int, updateMovieDto: UpdateMovieDto) {
-        val movie = queryMoviePort.findById(id)
+    override fun execute(idx: Long, updateMovieDto: UpdateMovieDto) {
+        val movie = queryMoviePort.findById(idx)
             .let { it ?: throw MovieNotFoundException() }
             .let {
                 Movie(
-                    id = it.id,
+                    idx = it.idx,
                     title = updateMovieDto.title,
                     description = updateMovieDto.description,
                     movieUrl = updateMovieDto.movieUrl,

@@ -15,14 +15,14 @@ class CreateDirectorService(
     override fun execute(createDirectorDto: CreateDirectorDto): DirectorDto {
         val director = commandDirectorPort.saveDirector(
             Director(
-                id = 0,
+                idx = 0L,
                 profileUrl = createDirectorDto.profileUrl,
                 name = createDirectorDto.name
             )
         )
 
         return DirectorDto(
-            id = director.id,
+            idx = director.idx,
             name = director.name,
             profileUrl = director.profileUrl
         )

@@ -9,7 +9,7 @@ class ActorMapper {
 
     fun toEntity(domain: Actor): ActorEntity =
         ActorEntity(
-            id = domain.id,
+            idx = domain.idx,
             profileUrl = domain.profileUrl,
             name = domain.name
         )
@@ -17,7 +17,7 @@ class ActorMapper {
     fun toDomain(entity: ActorEntity?): Actor? =
         entity?.let {
             Actor(
-                id = it.id,
+                idx = it.idx,
                 profileUrl = it.profileUrl,
                 name = it.name
             )

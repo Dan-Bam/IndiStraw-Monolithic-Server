@@ -12,7 +12,7 @@ class MovieMapper(
 
     fun toEntity(domain: Movie): MovieEntity =
         MovieEntity(
-            id = domain.id,
+            idx = domain.idx,
             title = domain.title,
             description = domain.description,
             movieUrl = domain.movieUrl,
@@ -29,7 +29,7 @@ class MovieMapper(
     fun toDomain(entity: MovieEntity?): Movie? =
         entity?.let {
             Movie(
-                id = it.id,
+                idx = it.idx,
                 title = it.title,
                 description = it.description,
                 movieUrl = it.movieUrl,

@@ -13,7 +13,7 @@ class MovieHistoryMapper(
 
     fun toEntity(domain: MovieHistory): MovieHistoryEntity =
         MovieHistoryEntity(
-            id = domain.id,
+            idx = domain.idx,
             movie = movieMapper.toEntity(domain.movie),
             account = accountMapper.toEntity(domain.account),
             historyTime = domain.historyTime
@@ -22,7 +22,7 @@ class MovieHistoryMapper(
     fun toDomain(entity: MovieHistoryEntity?): MovieHistory? =
         entity?.let {
             MovieHistory(
-                id = it.id,
+                idx = it.idx,
                 movie = movieMapper.toDomain(it.movie)!!,
                 account = accountMapper.toDomain(it.account)!!,
                 historyTime = it.historyTime

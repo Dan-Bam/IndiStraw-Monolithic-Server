@@ -14,9 +14,9 @@ data class UpdateMovieRequest(
     @field:NotNull
     val movieHighlight: List<String>,
     @field:NotNull
-    val director: List<Int>,
+    val director: List<Long>,
     @field:NotNull
-    val actor: List<Int>,
+    val actor: List<Long>,
     @field:NotNull
     val clowdTrue: Boolean
 )

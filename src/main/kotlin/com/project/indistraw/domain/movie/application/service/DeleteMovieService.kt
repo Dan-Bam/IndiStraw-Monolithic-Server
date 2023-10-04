@@ -12,8 +12,8 @@ class DeleteMovieService(
     private val queryMoviePort: QueryMoviePort
 ): DeleteMovieUseCase {
 
-    override fun execute(id: Int) {
-        val movie = queryMoviePort.findById(id) ?: throw MovieNotFoundException()
+    override fun execute(idx: Long) {
+        val movie = queryMoviePort.findById(idx) ?: throw MovieNotFoundException()
         commandMoviePort.deleteMovie(movie)
     }
 

@@ -4,6 +4,6 @@ import com.project.indistraw.domain.movie.application.port.input.dto.MovieDetail
 
 interface MovieDetailUseCase {
 
-    fun execute(id: Int): MovieDetailDto
+    fun execute(idx: Long): MovieDetailDto
 
 }
