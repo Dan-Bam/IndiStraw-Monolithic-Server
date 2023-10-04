@@ -51,7 +51,7 @@ class MovieWebAdapter(
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping
-    fun findMovieList(@PageableDefault(size=10, page = 0) pageable: Pageable, @RequestParam("keyword") genre: String?): ResponseEntity<MoviePagingResponse> =
+    fun findMovieDataList(@PageableDefault(size=10, page = 0) pageable: Pageable, @RequestParam("keyword") genre: String?): ResponseEntity<MoviePagingResponse> =
         movieListUseCase.execute(pageable, genre)
             .let { movieDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
