@@ -25,7 +25,7 @@ class MovieHistoryListService(
                 title = it.movie.title,
                 thumbnailUrl = it.movie.thumbnailUrl,
                 historyTime = it.historyTime,
-                movieIdx = it.movie.idx
+                idx = it.movie.idx
             )
         }
     }

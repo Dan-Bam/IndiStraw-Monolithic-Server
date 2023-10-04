@@ -4,5 +4,5 @@ data class MovieHistoryDto(
     val title: String,
     val thumbnailUrl: String,
     val historyTime: Float,
-    val movieIdx: Long
+    val idx: Long
 )

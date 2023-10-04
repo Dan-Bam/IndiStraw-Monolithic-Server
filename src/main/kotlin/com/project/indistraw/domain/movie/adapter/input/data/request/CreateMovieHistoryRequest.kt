@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull
 
 data class CreateMovieHistoryRequest(
     @field:NotNull
-    val movieIdx: Long,
+    val idx: Long,
     @field:NotNull
     val historyTime: Float
 )
