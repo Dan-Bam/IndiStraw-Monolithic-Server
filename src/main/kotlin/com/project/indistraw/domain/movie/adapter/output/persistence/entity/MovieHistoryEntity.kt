@@ -11,7 +11,7 @@ class MovieHistoryEntity(
     override val idx: Long,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_idx")
     val movie: MovieEntity,
 
     @ManyToOne(fetch = FetchType.LAZY)
