@@ -44,8 +44,6 @@ class MovieWebAdapter(
     private val searchDirectorUseCase: SearchDirectorUseCase,
     private val createDirectorUseCase: CreateDirectorUseCase,
     private val searchDirectorIdUseCase: SearchDirectorIdUseCase,
-    private val searchMovieUseCase: SearchMovieUseCase,
-    private val popularTagListService: PopularTagListService
 ) {
 
     @PostMapping
