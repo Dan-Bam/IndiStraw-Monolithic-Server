@@ -87,7 +87,7 @@ class MovieWebAdapter(
     @GetMapping("actor")
     fun findMovieActor(@RequestParam name: String): ResponseEntity<List<ActorResponse>> =
         searchActorUseCase.execute(name)
-            ?.map { actorDataMapper.toResponse(it) }
+            .map { actorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PostMapping("actor")
@@ -104,7 +104,7 @@ class MovieWebAdapter(
     @GetMapping("director")
     fun findMovieDirector(@RequestParam name: String): ResponseEntity<List<DirectorResponse>> =
         searchDirectorUseCase.execute(name)
-            ?.map { directorDataMapper.toResponse(it) }
+            .map { directorDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @PostMapping("director")
