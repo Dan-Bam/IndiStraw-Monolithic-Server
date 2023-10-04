@@ -3,20 +3,20 @@ package com.project.indistraw.domain.search.application.service
 import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.ServiceWithReadOnlyTransaction
 import com.project.indistraw.domain.crowdfunding.application.port.output.QueryCrowdfundingPort
 import com.project.indistraw.domain.movie.adapter.output.persistence.entity.toGenre
-import com.project.indistraw.domain.search.application.port.input.SearchMovieUseCase
+import com.project.indistraw.domain.search.application.port.input.RelatedSearchUseCase
 import com.project.indistraw.domain.movie.application.port.output.QueryActorPort
 import com.project.indistraw.domain.movie.application.port.output.QueryDirectorPort
 import com.project.indistraw.domain.movie.application.port.output.QueryMoviePort
 import org.springframework.data.redis.core.RedisTemplate
 
 @ServiceWithReadOnlyTransaction
-class SearchMovieService(
+class RelatedSearchService(
     private val queryMoviePort: QueryMoviePort,
     private val queryActorPort: QueryActorPort,
     private val queryDirectorPort: QueryDirectorPort,
     private val queryCrowdfundingPort: QueryCrowdfundingPort,
     private val redisTemplate: RedisTemplate<String, String>
-): SearchMovieUseCase {
+): RelatedSearchUseCase {
 
     override fun execute(keyword: String): List<String> {
         val movieList = queryMoviePort.findByTitleContaining(keyword)
