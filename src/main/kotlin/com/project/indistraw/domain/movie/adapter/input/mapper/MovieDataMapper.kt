@@ -43,7 +43,7 @@ class MovieDataMapper {
             isLast = dto.isLast,
             list = dto.list.map {
                 MovieResponse(
-                    idx = it.idx,
+                    id = it.id,
                     thumbnailUrl = it.thumbnailUrl
                 )
             }
