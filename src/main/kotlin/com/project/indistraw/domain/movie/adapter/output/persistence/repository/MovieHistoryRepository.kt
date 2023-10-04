@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface MovieHistoryRepository: JpaRepository<MovieHistoryEntity, Long> {
     fun findByMovieAndAccount(movie: MovieEntity, account: AccountEntity): MovieHistoryEntity?
     fun findByAccount(account: AccountEntity): List<MovieHistoryEntity>?
+    fun findByMovieIdxAndAccount(idx: Long, account: AccountEntity): MovieHistoryEntity?
 }
