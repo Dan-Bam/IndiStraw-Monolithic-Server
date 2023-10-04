@@ -75,7 +75,7 @@ jobs:
                 - name : MAX_FILE_SIZE
                   value: ${{ secrets.MAX_FILE_SIZE }}
                 - name : MAX_REQUEST_SIZE
-                  value: ${{ secrets.MAX_REQUEST_SIZE }
+                  value: ${{ secrets.MAX_REQUEST_SIZE }}
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
