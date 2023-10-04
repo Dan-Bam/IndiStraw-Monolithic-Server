@@ -40,6 +40,7 @@ class MovieDataMapper {
 
     fun toResponse(dto: MoviePagingDto): MoviePagingResponse =
         MoviePagingResponse(
+            isLast = dto.isLast,
             list = dto.list.map {
                 MovieResponse(
                     idx = it.idx,

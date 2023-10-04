@@ -31,6 +31,7 @@ class MovieListService(
         }.toList()
 
         return MoviePagingDto(
+            isLast = movieList.isLast,
             list = movieListDto
         )
     }
