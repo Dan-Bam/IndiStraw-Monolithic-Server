@@ -18,5 +18,5 @@ data class CreateMovieRequest(
     @field:NotNull
     val actor: List<Long>,
     @field:NotNull
-    val clowdTrue: Boolean
+    val crowdTrue: Boolean
 )

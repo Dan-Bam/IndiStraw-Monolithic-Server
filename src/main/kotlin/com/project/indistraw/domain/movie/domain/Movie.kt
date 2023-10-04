@@ -15,8 +15,8 @@ data class Movie(
     val account: Account,
     val actor: List<Long>,
     val director: List<Long>,
-    val movieHighLight: List<String>,
+    val movieHighlight: List<String>,
     val genre: Genre,
-    val clowdTrue: Boolean,
+    val crowdTrue: Boolean,
     val createdAt: LocalDateTime
 )

@@ -33,8 +33,8 @@ class CreateMovieService(
                 account = account,
                 actor = it.actor,
                 director = it.director,
-                clowdTrue = it.clowdTrue,
-                movieHighLight = it.movieHighlight,
+                crowdTrue = it.crowdTrue,
+                movieHighlight = it.movieHighlight,
                 genre = Genre.All,
                 createdAt = LocalDateTime.now()
             )

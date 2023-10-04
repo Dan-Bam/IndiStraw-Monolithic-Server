@@ -35,11 +35,11 @@ class MovieEntity(
     @Column(name = "movie_director")
     var director: List<Long>,
 
-    var clowdTrue: Boolean,
+    var crowdTrue: Boolean,
 
     @ElementCollection
     @Column(name = "movie_highlight")
-    val movieHighLight: List<String>,
+    val movieHighlight: List<String>,
 
     @Enumerated(EnumType.STRING)
     val genre: Genre,

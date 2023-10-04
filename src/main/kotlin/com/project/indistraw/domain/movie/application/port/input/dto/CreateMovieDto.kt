@@ -8,5 +8,5 @@ data class CreateMovieDto(
     val movieHighlight: List<String>,
     val director: List<Long>,
     val actor: List<Long>,
-    val clowdTrue: Boolean
+    val crowdTrue: Boolean
 )

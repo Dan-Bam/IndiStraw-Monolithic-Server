@@ -23,7 +23,7 @@ class MovieDataMapper {
             movieHighlight = request.movieHighlight,
             director = request.director,
             actor = request.actor,
-            clowdTrue = request.clowdTrue
+            crowdTrue = request.crowdTrue
         )
 
     fun toDto(request: UpdateMovieRequest): UpdateMovieDto =
@@ -35,7 +35,7 @@ class MovieDataMapper {
             movieHighlight = request.movieHighlight,
             director = request.director,
             actor = request.actor,
-            clowdTrue = request.clowdTrue
+            crowdTrue = request.crowdTrue
         )
 
     fun toResponse(dto: MoviePagingDto): MoviePagingResponse =
@@ -57,8 +57,8 @@ class MovieDataMapper {
             thumbnailUrl = dto.thumbnailUrl,
             director = dto.director,
             actor = dto.actor,
-            movieHighLight = dto.movieHighLight,
-            clowdTrue = dto.clowdTrue,
+            movieHighlight = dto.movieHighLight,
+            crowdTrue = dto.crowdTrue,
             genre = dto.genre
         )
 
