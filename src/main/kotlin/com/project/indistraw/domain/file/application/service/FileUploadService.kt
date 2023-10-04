@@ -19,30 +19,24 @@ class FileUploadService(
     private val fileValidator: FileValidator
 ) {
 
-    fun execute(files: List<MultipartFile>): List<String> {
-        fileValidator.verifyExtensions(files)
-        val fileNameList = ArrayList<String>()
+    fun execute(file: MultipartFile): String {
+        fileValidator.verifyExtensions(listOf(file))
+        val fileName = createFileName(file.originalFilename.toString())
+        val objectMetadata = ObjectMetadata()
+        objectMetadata.contentLength = file.size
+        objectMetadata.contentType = file.contentType
 
-        files.map {
-            it.let { uploadedFile ->
-                val fileName = createFileName(uploadedFile.originalFilename.toString())
-                val objectMetadata = ObjectMetadata()
-                objectMetadata.contentLength = uploadedFile.size
-                objectMetadata.contentType = uploadedFile.contentType
-                try {
-                    val inputStream: InputStream = uploadedFile.inputStream
-                    amazonS3.putObject(
-                        PutObjectRequest(awsS3Properties.bucket, fileName, inputStream, objectMetadata)
-                            .withCannedAcl(CannedAccessControlList.PublicRead)
-                    )
-                    fileNameList.add(fileName)
-                } catch (e: IOException) {
-                    throw IllegalStateException("파일 업로드에 실패하였습니다.")
-                }
-            }
+        try {
+            val inputStream: InputStream = file.inputStream
+            amazonS3.putObject(
+                PutObjectRequest(awsS3Properties.bucket, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead)
+            )
+        } catch (e: IOException) {
+            throw IllegalStateException("파일 업로드에 실패하였습니다.")
         }
 
-        return fileNameList
+        return fileName
     }
 
     private fun createFileName(fileName: String) =

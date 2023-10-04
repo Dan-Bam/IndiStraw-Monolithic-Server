@@ -15,9 +15,9 @@ class FileWebAdapter(
 ) {
 
     @PostMapping
-    fun uploadProfileImg(@RequestParam(name = "files") multipartFiles: List<MultipartFile>): ResponseEntity<List<Map<String, String>>> {
-        return fileUploadService.execute(multipartFiles)
-            .let { ResponseEntity.ok(it.map { mapOf("imageUrl" to it) }) }
+    fun uploadProfileImg(@RequestParam(name = "file") multipartFile: MultipartFile): ResponseEntity<Map<String, String>> {
+        return fileUploadService.execute(multipartFile)
+            .let { ResponseEntity.ok(mapOf("imageUrl" to it)) }
     }
 
 }
