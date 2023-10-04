@@ -27,9 +27,9 @@ class UpdateMovieService(
                     account = it.account,
                     actor = updateMovieDto.actor,
                     director = updateMovieDto.director,
-                    movieHighLight = updateMovieDto.movieHighlight,
+                    movieHighlight = updateMovieDto.movieHighlight,
                     genre = it.genre,
-                    clowdTrue = updateMovieDto.clowdTrue,
+                    crowdTrue = updateMovieDto.crowdTrue,
                     createdAt = it.createdAt
                 )
             }

@@ -11,7 +11,7 @@ data class MovieDetailResponse(
     val thumbnailUrl: String,
     val director: List<Director?>,
     val actor: List<Actor?>,
-    val movieHighLight: List<String>,
-    val clowdTrue: Boolean,
+    val movieHighlight: List<String>,
+    val crowdTrue: Boolean,
     val genre: Genre
 )
