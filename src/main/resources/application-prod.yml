@@ -22,7 +22,7 @@ spring:
   servlet:
     multipart:
       max-file-size: ${MAX_FILE_SIZE}
-      max-request-size: ${MAX-REQUEST-SIZE}
+      max-request-size: ${MAX_REQUEST_SIZE}
 
   mvc:
     pathmatch:
