@@ -20,7 +20,7 @@ class MovieHistoryDataMapper {
             title = dto.title,
             thumbnailUrl = dto.thumbnailUrl,
             historyTime = dto.historyTime,
-            movieIdx = dto.movieIdx
+            movieId = dto.movieId
         )
 
 }

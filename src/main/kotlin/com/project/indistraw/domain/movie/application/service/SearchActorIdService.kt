@@ -19,7 +19,7 @@ class SearchActorIdService(
         val movieList = queryMoviePort.findByActorContaining(actor.id)
         val movieListDto = movieList.map{
             MovieDto(
-                idx = it.id,
+                id = it.id,
                 thumbnailUrl = it.thumbnailUrl
             )
         }.toList()
