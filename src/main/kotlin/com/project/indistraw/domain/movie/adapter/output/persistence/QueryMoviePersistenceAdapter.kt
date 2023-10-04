@@ -51,6 +51,11 @@ class QueryMoviePersistenceAdapter(
         return movie.map { it.title }
     }
 
+    override fun findByPageableTitleContaining(pageRequest: PageRequest, keyword: String): Page<Movie> {
+        val movie = movieRepository.findByTitleContaining(pageRequest, keyword)
+        return movie.map { movieMapper.toDomain(it)!! }
+    }
+
     override fun existsByGenre(genre: Genre?): Boolean {
         return movieRepository.existsByGenre(genre)
     }

@@ -13,6 +13,7 @@ interface MovieRepository: JpaRepository<MovieEntity, Long> {
     fun findByActorContaining(actorIdx: Long): List<MovieEntity>
     fun findByDirectorContaining(directorIdx: Long): List<MovieEntity>
     fun findByTitleContaining(keyword: String): List<MovieEntity>
+    fun findByTitleContaining(pageable: Pageable, keyword: String): Page<MovieEntity>
     fun existsByGenre(genre: Genre?): Boolean
 
 }
