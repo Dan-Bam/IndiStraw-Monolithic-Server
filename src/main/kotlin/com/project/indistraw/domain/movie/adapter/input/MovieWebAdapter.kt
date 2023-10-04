@@ -7,8 +7,6 @@ import com.project.indistraw.domain.movie.adapter.input.mapper.DirectorDataMappe
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieDataMapper
 import com.project.indistraw.domain.movie.adapter.input.mapper.MovieHistoryDataMapper
 import com.project.indistraw.domain.movie.application.port.input.*
-import com.project.indistraw.domain.search.application.port.input.SearchMovieUseCase
-import com.project.indistraw.domain.search.application.service.PopularTagListService
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
@@ -38,6 +36,7 @@ class MovieWebAdapter(
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val createMovieHistoryUseCase: CreateMovieHistoryUseCase,
     private val movieHistoryListUseCase: MovieHistoryListUseCase,
+    private val movieHistoryDetailUseCase: MovieHistoryDetailUseCase,
     private val searchActorUseCase: SearchActorUseCase,
     private val createActorUseCase: CreateActorUseCase,
     private val searchActorIdUseCase: SearchActorIdUseCase,
@@ -82,6 +81,12 @@ class MovieWebAdapter(
     fun findMovieHistoryList(): ResponseEntity<List<MovieHistoryResponse>> =
         movieHistoryListUseCase.execute()
             .map { movieHistoryDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("history/{idx}")
+    fun findMovieHistory(@PathVariable(name = "idx") idx: Long): ResponseEntity<MovieHistoryDetailResponse> =
+        movieHistoryDetailUseCase.execute(idx)
+            .let { movieHistoryDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("actor")
