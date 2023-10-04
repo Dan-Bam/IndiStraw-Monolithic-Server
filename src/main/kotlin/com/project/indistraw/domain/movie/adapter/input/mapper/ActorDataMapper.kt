@@ -13,14 +13,14 @@ class ActorDataMapper {
 
     fun toResponse(dto: ActorDto): ActorResponse =
         ActorResponse(
-            id = dto.id,
+            idx = dto.idx,
             name = dto.name,
             profileUrl = dto.profileUrl
         )
 
     fun toResponse(dto: ActorIdDto): ActorIdResponse =
         ActorIdResponse(
-            id = dto.id,
+            idx = dto.idx,
             name = dto.name,
             profileUrl = dto.profileUrl,
             movieList = dto.movieList

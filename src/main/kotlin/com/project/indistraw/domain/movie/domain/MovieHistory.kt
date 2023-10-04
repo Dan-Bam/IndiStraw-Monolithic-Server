@@ -5,7 +5,7 @@ import com.project.indistraw.domain.account.domain.Account
 
 @AggregateRoot
 data class MovieHistory(
-    val id: Int,
+    val idx: Long,
     val movie: Movie,
     val account: Account,
     var historyTime: Float

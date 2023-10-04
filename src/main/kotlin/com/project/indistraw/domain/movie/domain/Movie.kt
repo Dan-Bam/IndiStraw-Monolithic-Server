@@ -7,14 +7,14 @@ import java.time.LocalDateTime
 
 @AggregateRoot
 data class Movie(
-    val id: Int,
+    val idx: Long,
     val title: String,
     val description: String,
     val movieUrl: String,
     val thumbnailUrl: String,
     val account: Account,
-    val actor: List<Int>,
-    val director: List<Int>,
+    val actor: List<Long>,
+    val director: List<Long>,
     val movieHighLight: List<String>,
     val genre: Genre,
     val clowdTrue: Boolean,

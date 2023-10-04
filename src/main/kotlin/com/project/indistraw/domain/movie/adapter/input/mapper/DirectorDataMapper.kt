@@ -13,14 +13,14 @@ class DirectorDataMapper {
 
     fun toResponse(dto: DirectorDto): DirectorResponse =
         DirectorResponse(
-            id = dto.id,
+            idx = dto.idx,
             name = dto.name,
             profileUrl = dto.profileUrl
         )
 
     fun toResponse(dto: DirectorIdDto): DirectorIdResponse =
         DirectorIdResponse(
-            id = dto.id,
+            idx = dto.idx,
             name = dto.name,
             profileUrl = dto.profileUrl,
             movieList = dto.movieList

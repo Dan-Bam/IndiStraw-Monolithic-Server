@@ -1,6 +1,6 @@
 package com.project.indistraw.domain.movie.adapter.output.persistence.entity
 
-import com.project.indistraw.common.entity.BaseIdEntity
+import com.project.indistraw.common.entity.BaseIdxEntity
 import com.project.indistraw.domain.account.adapter.output.persistence.entity.AccountEntity
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -8,8 +8,8 @@ import javax.persistence.*
 @Entity
 @Table(name = "movie")
 class MovieEntity(
-    @Column(name = "movie_id", nullable = false)
-    override val id: Int,
+    @Column(name = "movie_idx", nullable = false)
+    override val idx: Long,
 
     @Column(nullable = false)
     val title: String,
@@ -29,11 +29,11 @@ class MovieEntity(
 
     @ElementCollection
     @Column(name = "movie_actor")
-    var actor: List<Int>,
+    var actor: List<Long>,
 
     @ElementCollection
     @Column(name = "movie_director")
-    var director: List<Int>,
+    var director: List<Long>,
 
     var clowdTrue: Boolean,
 
@@ -46,4 +46,4 @@ class MovieEntity(
 
     @Column(nullable = false, updatable = false)
     val createdAt: LocalDateTime,
-): BaseIdEntity(id)
+): BaseIdxEntity(idx)

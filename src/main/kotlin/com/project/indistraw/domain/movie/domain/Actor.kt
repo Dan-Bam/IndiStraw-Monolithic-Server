@@ -4,7 +4,7 @@ import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.A
 
 @AggregateRoot
 data class Actor(
-    val id: Int,
+    val idx: Long,
     val profileUrl: String,
     val name: String
 )

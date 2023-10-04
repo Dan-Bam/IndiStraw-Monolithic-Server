@@ -25,7 +25,7 @@ class CreateMovieService(
 
         val movie = dto.let {
             Movie(
-                id = 0,
+                idx = 0L,
                 title = it.title,
                 description = it.description,
                 movieUrl = it.movieUrl,

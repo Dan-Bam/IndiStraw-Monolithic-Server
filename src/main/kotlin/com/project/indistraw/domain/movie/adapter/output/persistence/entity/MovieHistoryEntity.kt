@@ -1,14 +1,14 @@
 package com.project.indistraw.domain.movie.adapter.output.persistence.entity
 
-import com.project.indistraw.common.entity.BaseIdEntity
+import com.project.indistraw.common.entity.BaseIdxEntity
 import com.project.indistraw.domain.account.adapter.output.persistence.entity.AccountEntity
 import javax.persistence.*
 
 @Entity
 @Table(name = "movie_history")
 class MovieHistoryEntity(
-    @Column(name = "movie_history_id", nullable = false)
-    override val id: Int,
+    @Column(name = "movie_history_idx", nullable = false)
+    override val idx: Long,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
@@ -20,4 +20,4 @@ class MovieHistoryEntity(
 
     @Column(nullable = false)
     var historyTime: Float
-): BaseIdEntity(id)
+): BaseIdxEntity(idx)

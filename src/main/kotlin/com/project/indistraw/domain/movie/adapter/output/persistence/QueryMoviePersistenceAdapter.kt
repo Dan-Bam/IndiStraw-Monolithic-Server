@@ -21,13 +21,13 @@ class QueryMoviePersistenceAdapter(
         return movieList.map { movieMapper.toDomain(it) }
     }
 
-    override fun findByActorContaining(actorId: Int): List<Movie> {
-        val movieList = movieRepository.findByActorContaining(actorId)
+    override fun findByActorContaining(actorIdx: Long): List<Movie> {
+        val movieList = movieRepository.findByActorContaining(actorIdx)
         return movieList.map { movieMapper.toDomain(it)!! }
     }
 
-    override fun findByMovieContaining(directorId: Int): List<Movie> {
-        val movieList = movieRepository.findByDirectorContaining(directorId)
+    override fun findByMovieContaining(directorIdx: Long): List<Movie> {
+        val movieList = movieRepository.findByDirectorContaining(directorIdx)
         return movieList.map { movieMapper.toDomain(it)!! }
     }
 
@@ -41,8 +41,8 @@ class QueryMoviePersistenceAdapter(
         return movieList.map { movieMapper.toDomain(it)!! }
     }
 
-    override fun findById(id: Int): Movie? {
-        val movie = movieRepository.findByIdOrNull(id)
+    override fun findById(idx: Long): Movie? {
+        val movie = movieRepository.findByIdOrNull(idx)
         return movieMapper.toDomain(movie)
     }
 

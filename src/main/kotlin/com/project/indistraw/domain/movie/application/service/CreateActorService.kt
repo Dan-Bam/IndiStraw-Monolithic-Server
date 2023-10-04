@@ -15,14 +15,14 @@ class CreateActorService(
     override fun execute(createActorDto: CreateActorDto): ActorDto {
         val actor = commandActorPort.saveActor(
             Actor(
-                id = 0,
+                idx = 0L,
                 profileUrl = createActorDto.profileUrl,
                 name = createActorDto.name
             )
         )
 
         return ActorDto(
-            id = actor.id,
+            idx = actor.idx,
             profileUrl = actor.profileUrl,
             name = actor.name
         )

@@ -14,18 +14,18 @@ class SearchDirectorIdService(
     private val queryMoviePort: QueryMoviePort
 ): SearchDirectorIdUseCase {
 
-    override fun execute(id: Int): DirectorIdDto {
-        val director = queryDirectorPort.findById(id) ?: throw DirectorNotFoundException()
-        val movieList = queryMoviePort.findByActorContaining(director.id)
+    override fun execute(idx: Long): DirectorIdDto {
+        val director = queryDirectorPort.findById(idx) ?: throw DirectorNotFoundException()
+        val movieList = queryMoviePort.findByActorContaining(director.idx)
         val movieListDto = movieList.map{
             MovieDto(
-                id = it.id,
+                idx = it.idx,
                 thumbnailUrl = it.thumbnailUrl
             )
         }.toList()
 
         return DirectorIdDto(
-            id = director.id,
+            idx = director.idx,
             name = director.name,
             profileUrl = director.profileUrl,
             movieList = movieListDto

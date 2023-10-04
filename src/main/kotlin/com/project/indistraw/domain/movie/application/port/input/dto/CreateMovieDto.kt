@@ -6,7 +6,7 @@ data class CreateMovieDto(
     val movieUrl: String,
     val thumbnailUrl: String,
     val movieHighlight: List<String>,
-    val director: List<Int>,
-    val actor: List<Int>,
+    val director: List<Long>,
+    val actor: List<Long>,
     val clowdTrue: Boolean
 )

@@ -25,7 +25,7 @@ class MovieListService(
 
         val movieListDto = movieList.map{
             MovieDto(
-                id = it.id,
+                idx = it.idx,
                 thumbnailUrl = it.thumbnailUrl
             )
         }.toList()
