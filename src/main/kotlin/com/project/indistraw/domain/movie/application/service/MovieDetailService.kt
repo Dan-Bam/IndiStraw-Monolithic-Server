@@ -25,7 +25,7 @@ class MovieDetailService(
             thumbnailUrl = movie.thumbnailUrl,
             director = movie.director.map { queryDirectorPort.findById(it) },
             actor = movie.actor.map { queryActorPort.findById(it) },
-            movieHighLight = movie.movieHighlight,
+            movieHighlight = movie.movieHighlight,
             crowdTrue = movie.crowdTrue,
             genre = movie.genre
         )

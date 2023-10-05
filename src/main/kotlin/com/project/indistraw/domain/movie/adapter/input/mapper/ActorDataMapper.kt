@@ -26,10 +26,10 @@ class ActorDataMapper {
             movieList = dto.movieList
         )
 
-    fun toDto(createActorRequest: CreateActorRequest): CreateActorDto =
+    fun toDto(request: CreateActorRequest): CreateActorDto =
         CreateActorDto(
-            name = createActorRequest.name,
-            profileUrl = createActorRequest.profileUrl
+            name = request.name,
+            profileUrl = request.profileUrl
         )
 
 }
