@@ -57,7 +57,7 @@ class MovieDataMapper {
             thumbnailUrl = dto.thumbnailUrl,
             director = dto.director,
             actor = dto.actor,
-            movieHighlight = dto.movieHighLight,
+            movieHighlight = dto.movieHighlight,
             crowdTrue = dto.crowdTrue,
             genre = dto.genre
         )

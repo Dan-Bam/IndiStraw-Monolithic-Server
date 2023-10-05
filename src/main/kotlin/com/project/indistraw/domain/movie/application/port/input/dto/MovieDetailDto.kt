@@ -11,7 +11,7 @@ data class MovieDetailDto(
     val thumbnailUrl: String,
     val director: List<Director?>,
     val actor: List<Actor?>,
-    val movieHighLight: List<String>,
+    val movieHighlight: List<String>,
     val crowdTrue: Boolean,
     val genre: Genre
 )
