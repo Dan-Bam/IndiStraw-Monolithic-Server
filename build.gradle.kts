@@ -77,6 +77,9 @@ dependencies {
 	/* coolsms */
 	implementation("net.nurigo:javaSDK:2.2")
 
+	/* cache */
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+
 	/* mapper */
 	implementation("org.mapstruct:mapstruct:1.5.2.Final")
 	kapt("org.mapstruct:mapstruct-processor:1.5.2.Final")
