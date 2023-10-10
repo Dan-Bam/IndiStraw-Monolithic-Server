@@ -5,10 +5,7 @@ import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovie
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieResponse
-import com.project.indistraw.domain.movie.application.port.input.dto.CreateMovieDto
-import com.project.indistraw.domain.movie.application.port.input.dto.MovieDetailDto
-import com.project.indistraw.domain.movie.application.port.input.dto.MoviePagingDto
-import com.project.indistraw.domain.movie.application.port.input.dto.UpdateMovieDto
+import com.project.indistraw.domain.movie.application.port.input.dto.*
 import org.springframework.stereotype.Component
 
 @Component
@@ -55,8 +52,20 @@ class MovieDataMapper {
             description = dto.description,
             movieUrl = dto.movieUrl,
             thumbnailUrl = dto.thumbnailUrl,
-            director = dto.director,
-            actor = dto.actor,
+            director = dto.director.map {
+                    DirectorDto(
+                        idx = it.idx,
+                        name = it.name,
+                        profileUrl = it.profileUrl
+                    )
+            },
+            actor = dto.actor.map {
+                  ActorDto(
+                      idx = it.idx,
+                      name = it.name,
+                      profileUrl = it.profileUrl
+                  )
+            },
             movieHighlight = dto.movieHighlight,
             crowdTrue = dto.crowdTrue,
             genre = dto.genre
