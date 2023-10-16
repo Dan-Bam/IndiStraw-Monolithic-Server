@@ -18,7 +18,8 @@ class AccountMapper(
             phoneNumber = domain.phoneNumber,
             address = addressMapper.toEntity(domain.address),
             profileUrl = domain.profileUrl,
-            authority = domain.authority
+            authority = domain.authority,
+            actor = domain.actor
         )
 
     fun toDomain(entity: AccountEntity?): Account? =
@@ -31,7 +32,8 @@ class AccountMapper(
                 phoneNumber = entity.phoneNumber,
                 address = addressMapper.toDomain(entity.address),
                 profileUrl = entity.profileUrl,
-                authority = entity.authority
+                authority = entity.authority,
+                actor = entity.actor
             )
         }
 

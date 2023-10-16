@@ -45,5 +45,5 @@ class MovieEntity(
     val genre: Genre,
 
     @Column(nullable = false, updatable = false)
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime
 ): BaseIdxEntity(idx)
