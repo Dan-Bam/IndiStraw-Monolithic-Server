@@ -11,7 +11,8 @@ data class Account(
     var address: Address?,
     var profileUrl: String?,
     val authority: Authority,
-    var actor: MutableList<Long>?
+    var actor: MutableList<Long>?,
+    var director: MutableList<Long>?,
 ) {
 
     fun updateInfo(name: String, profileUrl: String?): Account {
@@ -44,6 +45,17 @@ data class Account(
             mutableActors
         }
         return this.copy(actor = updateActors)
+    }
+
+    fun addDirector(idx: Long): Account {
+        val updateDirectors = if (this.director.isNullOrEmpty()) {
+            mutableListOf(idx)
+        } else {
+            val mutableDirectors = this.director!!.toMutableList()
+            mutableDirectors.add(idx)
+            mutableDirectors
+        }
+        return this.copy(director = updateDirectors)
     }
 
 }

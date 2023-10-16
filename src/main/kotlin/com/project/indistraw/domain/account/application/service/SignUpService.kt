@@ -42,7 +42,8 @@ class SignUpService(
                 address = Address(null, null, null),
                 profileUrl = it.profileUrl,
                 authority = Authority.ROLE_ACCOUNT,
-                actor = null
+                actor = null,
+                director = null
             )
         }
         commandAccountPort.saveAccount(account)
