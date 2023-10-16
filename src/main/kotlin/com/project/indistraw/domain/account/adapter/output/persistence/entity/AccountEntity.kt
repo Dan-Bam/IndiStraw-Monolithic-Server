@@ -36,5 +36,9 @@ class AccountEntity(
 
     @ElementCollection
     @Column(name = "account_actor")
-    var actor: MutableList<Long>?
+    var actor: MutableList<Long>?,
+
+    @ElementCollection
+    @Column(name = "account_director")
+    var director: MutableList<Long>?
 ): BaseUUIDEntity(accountIdx)

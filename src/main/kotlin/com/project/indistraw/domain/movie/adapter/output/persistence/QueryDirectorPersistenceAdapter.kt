@@ -23,4 +23,7 @@ class QueryDirectorPersistenceAdapter(
         return director.map { directorMapper.toDomain(it)!! }
     }
 
+    override fun existsByIdx(idx: Long): Boolean =
+        directorRepository.existsByIdx(idx)
+
 }

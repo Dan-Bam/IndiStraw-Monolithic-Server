@@ -6,5 +6,6 @@ interface QueryDirectorPort {
 
     fun findByIdOrNull(idx: Long): Director?
     fun findByNameContaining(name: String): List<Director>
+    fun existsByIdx(idx: Long): Boolean
 
 }
