@@ -21,7 +21,8 @@ class AccountWebAdapter(
     private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
     private val findAccountInfoUseCase: FindAccountInfoUseCase,
     private val accountWithdrawUseCase: AccountWithdrawUseCase,
-    private val mappingActorUseCase: MappingActorUseCase
+    private val mappingActorUseCase: MappingActorUseCase,
+    private val mappingDirectorUseCase: MappingDirectorUseCase
 ) {
 
     @GetMapping("/phone-number/{phoneNumber}")
@@ -63,6 +64,11 @@ class AccountWebAdapter(
     @PostMapping("/actor/{idx}")
     fun mappingActor(@PathVariable idx: Long): ResponseEntity<Void> =
         mappingActorUseCase.execute(idx)
+            .run { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @PostMapping("/director/{idx}")
+    fun mappingDirector(@PathVariable idx: Long): ResponseEntity<Void> =
+        mappingDirectorUseCase.execute(idx)
             .run { ResponseEntity.status(HttpStatus.CREATED).build() }
 
 }
