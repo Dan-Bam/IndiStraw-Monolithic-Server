@@ -23,4 +23,7 @@ class QueryActorPersistenceAdapter(
         return actorList.map { actorMapper.toDomain(it)!! }
     }
 
+    override fun existsByIdx(idx: Long): Boolean =
+        actorRepository.existsByIdx(idx)
+
 }
