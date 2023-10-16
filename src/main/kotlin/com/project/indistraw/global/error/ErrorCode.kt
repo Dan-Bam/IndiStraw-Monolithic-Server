@@ -63,4 +63,6 @@ enum class ErrorCode(
     FAILED_PAY_CANCEL("결제 취소에 실패하였습니다.", 400),
     RECEIPT_ID_NOT_FOUND("존재하지 않은 receiptId 입니다.", 404),
 
+    // SERVER
+    INTERNAL_SERVER_ERROR("서버 내부 에러", 500)
 }
