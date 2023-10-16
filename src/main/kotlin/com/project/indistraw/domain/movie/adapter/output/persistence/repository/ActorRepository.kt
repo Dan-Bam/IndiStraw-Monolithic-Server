@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository
 interface ActorRepository: CrudRepository<ActorEntity, Long> {
     fun findByNameContaining(name: String): List<ActorEntity>
     fun save(actorEntity: ActorEntity): ActorEntity
+    fun existsByIdx(idx: Long): Boolean
 }

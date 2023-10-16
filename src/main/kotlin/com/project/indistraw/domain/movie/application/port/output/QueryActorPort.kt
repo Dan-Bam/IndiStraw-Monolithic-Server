@@ -6,5 +6,6 @@ interface QueryActorPort {
 
     fun findByIdOrNull(idx: Long): Actor?
     fun findByNameContaining(name: String): List<Actor>
+    fun existsByIdx(idx: Long): Boolean
 
 }

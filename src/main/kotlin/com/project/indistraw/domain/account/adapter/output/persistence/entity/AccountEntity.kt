@@ -33,4 +33,8 @@ class AccountEntity(
 
     @Enumerated(EnumType.STRING)
     val authority: Authority,
+
+    @ElementCollection
+    @Column(name = "account_actor")
+    var actor: MutableList<Long>?
 ): BaseUUIDEntity(accountIdx)

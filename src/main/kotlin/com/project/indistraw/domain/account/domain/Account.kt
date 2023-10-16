@@ -10,7 +10,8 @@ data class Account(
     var phoneNumber: String,
     var address: Address?,
     var profileUrl: String?,
-    val authority: Authority
+    val authority: Authority,
+    var actor: MutableList<Long>?
 ) {
 
     fun updateInfo(name: String, profileUrl: String?): Account {
@@ -32,6 +33,17 @@ data class Account(
     fun updatePhoneNumber(phoneNumber: String): Account {
         this.phoneNumber = phoneNumber
         return this
+    }
+
+    fun addActor(idx: Long): Account {
+        val updateActors = if (this.actor.isNullOrEmpty()) {
+            mutableListOf(idx)
+        } else {
+            val mutableActors = this.actor!!.toMutableList()
+            mutableActors.add(idx)
+            mutableActors
+        }
+        return this.copy(actor = updateActors)
     }
 
 }
