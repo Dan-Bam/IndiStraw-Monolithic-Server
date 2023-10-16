@@ -25,18 +25,18 @@ class MovieDetailService(
             description = movie.description,
             movieUrl = movie.movieUrl,
             thumbnailUrl = movie.thumbnailUrl,
-            director = movie.director.map { queryDirectorPort.findByIdOrNull(it)!!.let {
+            director = movie.director.map { queryDirectorPort.findByIdOrNull(it)!!.let { director ->
                 DirectorDto(
-                    idx = it.idx,
-                    name = it.name,
-                    profileUrl = it.profileUrl
+                    idx = director.idx,
+                    name = director.name,
+                    profileUrl = director.profileUrl
                 )
             } },
-            actor = movie.actor.map { queryActorPort.findByIdOrNull(it)!!.let {
+            actor = movie.actor.map { queryActorPort.findByIdOrNull(it)!!.let { actor ->
                 ActorDto(
-                    idx = it.idx,
-                    name = it.name,
-                    profileUrl = it.profileUrl
+                    idx = actor.idx,
+                    name = actor.name,
+                    profileUrl = actor.profileUrl
                 )
             } },
             movieHighlight = movie.movieHighlight,
