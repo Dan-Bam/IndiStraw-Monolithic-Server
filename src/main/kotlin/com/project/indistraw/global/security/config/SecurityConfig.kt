@@ -48,7 +48,6 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.DELETE, "/api/v1/account").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ADMIN.name)
             .mvcMatchers(HttpMethod.POST, "/api/v1/account/actor/{idx}").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ADMIN.name)
             .mvcMatchers(HttpMethod.POST, "/api/v1/account/director/{idx}").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ADMIN.name)
-            .mvcMatchers(HttpMethod.GET, "/api/v1/account/filmography").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ADMIN.name)
 
             .mvcMatchers(HttpMethod.POST, "/api/v1/movie").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ADMIN.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/movie").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
@@ -63,6 +62,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.GET, "/api/v1/movie/director").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.POST, "/api/v1/movie/director").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/movie/director/{idx}").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
+            .mvcMatchers(HttpMethod.GET, "/api/v1/movie/filmography").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ADMIN.name)
 
             .mvcMatchers(HttpMethod.GET, "/api/v1/search").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)
             .mvcMatchers(HttpMethod.GET, "/api/v1/search/tag").hasAnyAuthority(Authority.ROLE_ACCOUNT.name, Authority.ROLE_ACCOUNT.name)

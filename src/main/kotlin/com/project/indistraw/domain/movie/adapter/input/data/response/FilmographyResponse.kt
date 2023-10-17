@@ -1,4 +1,4 @@
-package com.project.indistraw.domain.account.adapter.input.data.response
+package com.project.indistraw.domain.movie.adapter.input.data.response
 
 data class FilmographyResponse(
     val idx: Long,

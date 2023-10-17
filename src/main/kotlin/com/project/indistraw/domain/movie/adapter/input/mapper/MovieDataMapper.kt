@@ -2,6 +2,7 @@ package com.project.indistraw.domain.movie.adapter.input.mapper
 
 import com.project.indistraw.domain.movie.adapter.input.data.request.CreateMovieRequest
 import com.project.indistraw.domain.movie.adapter.input.data.request.UpdateMovieRequest
+import com.project.indistraw.domain.movie.adapter.input.data.response.FilmographyResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieDetailResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MoviePagingResponse
 import com.project.indistraw.domain.movie.adapter.input.data.response.MovieResponse
@@ -69,6 +70,12 @@ class MovieDataMapper {
             movieHighlight = dto.movieHighlight,
             crowdTrue = dto.crowdTrue,
             genre = dto.genre
+        )
+
+    fun toResponse(dto: FilmographyDto): FilmographyResponse =
+        FilmographyResponse(
+            idx = dto.idx,
+            profileUrl = dto.profileUrl
         )
 
 }

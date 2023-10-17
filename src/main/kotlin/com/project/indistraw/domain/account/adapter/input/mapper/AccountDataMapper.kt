@@ -4,8 +4,9 @@ import com.project.indistraw.domain.account.adapter.input.data.request.UpdateAcc
 import com.project.indistraw.domain.account.adapter.input.data.request.UpdateAddressRequest
 import com.project.indistraw.domain.account.adapter.input.data.request.UpdatePasswordRequest
 import com.project.indistraw.domain.account.adapter.input.data.response.AccountInfoResponse
-import com.project.indistraw.domain.account.adapter.input.data.response.FilmographyResponse
+import com.project.indistraw.domain.movie.adapter.input.data.response.FilmographyResponse
 import com.project.indistraw.domain.account.application.port.input.dto.*
+import com.project.indistraw.domain.movie.application.port.input.dto.FilmographyDto
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.MappingConstants
