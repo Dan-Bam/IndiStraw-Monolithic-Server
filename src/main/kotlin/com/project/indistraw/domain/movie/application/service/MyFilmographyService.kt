@@ -1,9 +1,9 @@
-package com.project.indistraw.domain.account.application.service
+package com.project.indistraw.domain.movie.application.service
 
 import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.ServiceWithReadOnlyTransaction
 import com.project.indistraw.domain.account.application.exception.AccountNotFoundException
-import com.project.indistraw.domain.account.application.port.input.MyFilmographyUseCase
-import com.project.indistraw.domain.account.application.port.input.dto.FilmographyDto
+import com.project.indistraw.domain.movie.application.port.input.MyFilmographyUseCase
+import com.project.indistraw.domain.movie.application.port.input.dto.FilmographyDto
 import com.project.indistraw.domain.account.application.port.output.AccountSecurityPort
 import com.project.indistraw.domain.account.application.port.output.QueryAccountPort
 import com.project.indistraw.domain.movie.application.exception.ActorNotFoundException
