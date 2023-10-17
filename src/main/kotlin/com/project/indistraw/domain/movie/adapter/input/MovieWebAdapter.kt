@@ -42,7 +42,7 @@ class MovieWebAdapter(
     private val searchActorIdUseCase: SearchActorIdUseCase,
     private val searchDirectorUseCase: SearchDirectorUseCase,
     private val createDirectorUseCase: CreateDirectorUseCase,
-    private val searchDirectorIdUseCase: SearchDirectorIdUseCase,
+    private val searchDirectorIdUseCase: SearchDirectorIdUseCase
 ) {
 
     @PostMapping

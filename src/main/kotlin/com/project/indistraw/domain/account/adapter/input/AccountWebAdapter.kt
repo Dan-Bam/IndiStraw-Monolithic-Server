@@ -4,6 +4,7 @@ import com.project.indistraw.domain.account.adapter.input.data.request.UpdateAcc
 import com.project.indistraw.domain.account.adapter.input.data.request.UpdateAddressRequest
 import com.project.indistraw.domain.account.adapter.input.data.request.UpdatePasswordRequest
 import com.project.indistraw.domain.account.adapter.input.data.response.AccountInfoResponse
+import com.project.indistraw.domain.account.adapter.input.data.response.FilmographyResponse
 import com.project.indistraw.domain.account.adapter.input.mapper.AccountDataMapper
 import com.project.indistraw.domain.account.application.port.input.*
 import org.springframework.http.HttpStatus
@@ -22,7 +23,8 @@ class AccountWebAdapter(
     private val findAccountInfoUseCase: FindAccountInfoUseCase,
     private val accountWithdrawUseCase: AccountWithdrawUseCase,
     private val mappingActorUseCase: MappingActorUseCase,
-    private val mappingDirectorUseCase: MappingDirectorUseCase
+    private val mappingDirectorUseCase: MappingDirectorUseCase,
+    private val myFilmographyUseCase: MyFilmographyUseCase
 ) {
 
     @GetMapping("/phone-number/{phoneNumber}")
@@ -70,5 +72,11 @@ class AccountWebAdapter(
     fun mappingDirector(@PathVariable idx: Long): ResponseEntity<Void> =
         mappingDirectorUseCase.execute(idx)
             .run { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @GetMapping("/filmography")
+    fun findFilmography(): ResponseEntity<List<FilmographyResponse>> =
+        myFilmographyUseCase.execute()
+            .map { accountDataMapper toResponse it }
+            .let { ResponseEntity.ok(it) }
 
 }
