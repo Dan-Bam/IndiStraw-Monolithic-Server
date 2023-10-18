@@ -2,5 +2,5 @@ package com.project.indistraw.domain.movie.adapter.input.data.response
 
 data class FilmographyResponse(
     val idx: Long,
-    val profileUrl: String
+    val thumbnailUrl: String
 )

@@ -75,7 +75,7 @@ class MovieDataMapper {
     fun toResponse(dto: FilmographyDto): FilmographyResponse =
         FilmographyResponse(
             idx = dto.idx,
-            profileUrl = dto.profileUrl
+            thumbnailUrl = dto.thumbnailUrl
         )
 
 }
