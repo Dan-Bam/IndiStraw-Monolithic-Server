@@ -16,5 +16,7 @@ interface QueryMoviePort {
     fun findByTitleContaining(keyword: String): List<String>
     fun findByPageableTitleContaining(pageRequest: PageRequest, keyword: String): Page<Movie>
     fun existsByGenre(genre: Genre?): Boolean
+    fun findByActorIn(actor: List<Long>): List<Movie>?
+    fun findByDirectorIn(director: List<Long>): List<Movie>?
 
 }

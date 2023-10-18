@@ -60,4 +60,14 @@ class QueryMoviePersistenceAdapter(
         return movieRepository.existsByGenre(genre)
     }
 
+    override fun findByActorIn(actor: List<Long>): List<Movie>? {
+        val actors = movieRepository.findByActorIn(actor)
+        return actors.map { movieMapper.toDomain(it)!! }
+    }
+
+    override fun findByDirectorIn(director: List<Long>): List<Movie>? {
+        val directors = movieRepository.findByDirectorIn(director)
+        return directors.map { movieMapper.toDomain(it)!! }
+    }
+
 }
