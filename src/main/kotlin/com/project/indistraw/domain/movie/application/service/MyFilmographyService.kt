@@ -40,7 +40,7 @@ class MyFilmographyService(
                 thumbnailUrl = it.thumbnailUrl
             )
         }
-        return actorFilmographyList + directorFilmographyList
+        return (actorFilmographyList + directorFilmographyList).distinctBy { it.idx }
     }
 
 }
