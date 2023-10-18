@@ -10,40 +10,36 @@ import com.project.indistraw.domain.movie.application.exception.ActorNotFoundExc
 import com.project.indistraw.domain.movie.application.exception.DirectorNotFoundException
 import com.project.indistraw.domain.movie.application.port.output.QueryActorPort
 import com.project.indistraw.domain.movie.application.port.output.QueryDirectorPort
+import com.project.indistraw.domain.movie.application.port.output.QueryMoviePort
 
 @ServiceWithReadOnlyTransaction
 class MyFilmographyService(
     private val accountSecurityPort: AccountSecurityPort,
     private val queryAccountPort: QueryAccountPort,
-    private val queryActorPort: QueryActorPort,
-    private val queryDirectorPort: QueryDirectorPort
+    private val queryMoviePort: QueryMoviePort
 ): MyFilmographyUseCase {
 
     override fun execute(): List<FilmographyDto> {
         val accountIdx = accountSecurityPort.getCurrentAccountIdx()
         val account = queryAccountPort.findByIdxOrNull(accountIdx) ?: throw AccountNotFoundException()
-        println(account.actor?.size)
-        println(account.director?.size)
-        val actors = account.actor?.map {
-            queryActorPort.findByIdOrNull(it) ?: throw ActorNotFoundException()
+        val actors = account.actor?.let {
+            queryMoviePort.findByActorIn(it) ?: throw ActorNotFoundException()
         }
-        val directors = account.director?.map {
-            queryDirectorPort.findByIdOrNull(it) ?: throw DirectorNotFoundException()
+        val directors = account.director?.let {
+            queryMoviePort.findByDirectorIn(it) ?: throw DirectorNotFoundException()
         }
         val actorFilmographyList = actors!!.map {
             FilmographyDto(
                 idx = it.idx,
-                profileUrl = it.profileUrl
+                thumbnailUrl = it.thumbnailUrl
             )
         }
-        println(actorFilmographyList.size)
         val directorFilmographyList = directors!!.map {
             FilmographyDto(
                 idx = it.idx,
-                profileUrl = it.profileUrl
+                thumbnailUrl = it.thumbnailUrl
             )
         }
-        println(directorFilmographyList.size)
         return actorFilmographyList + directorFilmographyList
     }
 
