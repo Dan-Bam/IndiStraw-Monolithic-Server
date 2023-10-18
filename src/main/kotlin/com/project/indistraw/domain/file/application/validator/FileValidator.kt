@@ -17,12 +17,12 @@ class FileValidator {
         const val TIFF = "tiff"
         const val TIF = "tif"
         const val WEBP = "webp"
-        const val PD4 = "pd4"
+        const val PDF = "pdf"
         const val HWP = "hwp"
     }
 
     fun verifyExtensions(multipartFiles: List<MultipartFile>) {
-        val allowedExtensions = setOf(JPEG, JPG, PNG, MP4, GIF, BMP, TIFF, TIF, WEBP, PD4, HWP)
+        val allowedExtensions = setOf(JPEG, JPG, PNG, MP4, GIF, BMP, TIFF, TIF, WEBP, PDF, HWP)
         multipartFiles.map {
             val originalFileName = it.originalFilename ?: ""
             val fileExtension = originalFileName.substringAfterLast(".","").toLowerCase()
