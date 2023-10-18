@@ -35,7 +35,7 @@ class CreateCrowdfundingService(
             createdAt = LocalDateTime.now(),
             endDate = dto.endDate,
             viewCount = 0,
-            statusType = Crowdfunding.StatusType.UNDER_REVIEW,
+            statusType = Crowdfunding.StatusType.RECRUITING,
             thumbnailUrl = dto.thumbnailUrl,
             imageList = dto.imageList,
             fileList = dto.fileList

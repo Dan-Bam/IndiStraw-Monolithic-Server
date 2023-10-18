@@ -33,7 +33,7 @@ class CrowdfundingWebAdapter(
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping("/{idx}")
-    fun createCrowdfunding(@PathVariable idx: Long): ResponseEntity<CrowdfundingDetailResponse> =
+    fun crowdfundingDetail(@PathVariable idx: Long): ResponseEntity<CrowdfundingDetailResponse> =
         crowdfundingDetailUseCase.execute(idx)
             .let { crowdfundingDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
