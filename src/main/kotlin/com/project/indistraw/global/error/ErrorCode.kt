@@ -25,9 +25,11 @@ enum class ErrorCode(
 
     // ACTOR
     ACTOR_NOT_FOUND("존재하지 않는 배우입니다.", 404),
+    ALREADY_MAPPING_ACTOR("이미 등록된 배우입니다.", 400),
 
     // DIRECTOR
     DIRECTOR_NOT_FOUND("존재하지 않는 감독입니다.", 404),
+    ALREADY_MAPPING_DIRECTOR("이미 등록된 감독입니다.", 400),
 
     // AUTHENTICATION
     AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", 404),

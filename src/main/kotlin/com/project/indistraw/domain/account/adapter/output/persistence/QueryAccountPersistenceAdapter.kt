@@ -35,4 +35,10 @@ class QueryAccountPersistenceAdapter(
         return accountMapper.toDomain(accountEntity)
     }
 
+    override fun existsByActor(actorIdx: Long): Boolean =
+        accountRepository.existsByActor(actorIdx)
+
+    override fun existsByDirector(directorIdx: Long): Boolean =
+        accountRepository.existsByDirector(directorIdx)
+
 }

@@ -2,6 +2,7 @@ package com.project.indistraw.domain.account.application.service
 
 import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.ServiceWithTransaction
 import com.project.indistraw.domain.account.application.exception.AccountNotFoundException
+import com.project.indistraw.domain.account.application.exception.AlreadyMappingDirectorException
 import com.project.indistraw.domain.account.application.port.input.MappingDirectorUseCase
 import com.project.indistraw.domain.account.application.port.output.AccountSecurityPort
 import com.project.indistraw.domain.account.application.port.output.CommandAccountPort
@@ -22,6 +23,9 @@ class MappingDirectorService(
         val account = queryAccountPort.findByIdxOrNull(accountIdx) ?: throw AccountNotFoundException()
         if (!queryDirectorPort.existsByIdx(idx)) {
             throw DirectorNotFoundException()
+        }
+        if (queryAccountPort.existsByDirector(idx)) {
+            throw AlreadyMappingDirectorException()
         }
         val updateAccount = account.addDirector(idx)
         commandAccountPort.saveAccount(updateAccount)
