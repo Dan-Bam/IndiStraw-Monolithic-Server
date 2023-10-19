@@ -10,5 +10,7 @@ interface QueryAccountPort {
     fun findByIdOrNull(id: String): Account?
     fun findByIdxOrNull(idx: UUID): Account?
     fun findByPhoneNumberOrNull(phoneNumber: String): Account?
+    fun existsByActor(actorIdx: Long): Boolean
+    fun existsByDirector(directorIdx: Long): Boolean
 
 }

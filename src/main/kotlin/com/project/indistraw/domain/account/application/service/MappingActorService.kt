@@ -2,6 +2,7 @@ package com.project.indistraw.domain.account.application.service
 
 import com.proejct.indistraw.domain.crowdfunding.application.common.annotation.ServiceWithTransaction
 import com.project.indistraw.domain.account.application.exception.AccountNotFoundException
+import com.project.indistraw.domain.account.application.exception.AlreadyMappingActorException
 import com.project.indistraw.domain.account.application.port.input.MappingActorUseCase
 import com.project.indistraw.domain.account.application.port.output.AccountSecurityPort
 import com.project.indistraw.domain.account.application.port.output.CommandAccountPort
@@ -22,6 +23,9 @@ class MappingActorService(
         val account = queryAccountPort.findByIdxOrNull(accountIdx) ?: throw AccountNotFoundException()
         if (!queryActorPort.existsByIdx(idx)) {
             throw ActorNotFoundException()
+        }
+        if (queryAccountPort.existsByActor(idx)) {
+            throw AlreadyMappingActorException()
         }
         val updateAccount = account.addActor(idx)
         commandAccountPort.saveAccount(updateAccount)

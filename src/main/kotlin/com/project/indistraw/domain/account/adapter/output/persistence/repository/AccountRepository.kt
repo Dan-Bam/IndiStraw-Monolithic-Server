@@ -10,5 +10,7 @@ interface AccountRepository: CrudRepository<AccountEntity, UUID> {
     fun existsByPhoneNumber(phoneNumber: String): Boolean
     fun findById(id: String): AccountEntity?
     fun findByPhoneNumber(phoneNumber: String): AccountEntity?
+    fun existsByActor(actorIdx: Long): Boolean
+    fun existsByDirector(directorIdx: Long): Boolean
 
 }
