@@ -35,8 +35,8 @@ class FileUploadService(
         } catch (e: IOException) {
             throw IllegalStateException("파일 업로드에 실패하였습니다.")
         }
-
-        return fileName
+        val hlsFileName = fileName.substring(0, fileName.indexOf("."))
+        return "$hlsFileName/Default/HLS/$hlsFileName.m3u8"
     }
 
     private fun createFileName(fileName: String) =
