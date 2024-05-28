@@ -6,6 +6,7 @@ import com.project.indistraw.domain.movie.application.port.input.MovieListUseCas
 import com.project.indistraw.domain.movie.application.port.input.dto.MovieDto
 import com.project.indistraw.domain.movie.application.port.input.dto.MoviePagingDto
 import com.project.indistraw.domain.movie.application.port.output.QueryMoviePort
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -15,6 +16,11 @@ class MovieListService(
     private val queryMoviePort: QueryMoviePort
 ): MovieListUseCase {
 
+    @Cacheable(
+        value = ["MovieList"],
+        key = "#root.target.generateCacheKey(#pageable.pageNumber, #pageable.pageSize)",
+        cacheManager = "contentCacheManager",
+    )
     override fun execute(pageable: Pageable, genre: String?): MoviePagingDto {
         val pageRequest = PageRequest.of(pageable.pageNumber, pageable.pageSize, Sort.by(Sort.Order.desc("createdAt")))
         val movieList = if (genre == null) {
@@ -31,9 +37,13 @@ class MovieListService(
         }.toList()
 
         return MoviePagingDto(
-            isLast = movieList.isLast,
+            last = movieList.isLast,
             list = movieListDto
         )
+    }
+
+    fun generateCacheKey(page: Int, size: Int): String {
+        return "$page-$size"
     }
 
 }
