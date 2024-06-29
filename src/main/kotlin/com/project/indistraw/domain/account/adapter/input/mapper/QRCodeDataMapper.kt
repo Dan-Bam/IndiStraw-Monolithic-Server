@@ -2,18 +2,14 @@ package com.project.indistraw.domain.account.adapter.input.mapper
 
 import com.project.indistraw.domain.account.adapter.input.data.request.QRCodeUUIDRequest
 import com.project.indistraw.domain.account.application.port.input.dto.QRCodeUUIDDto
-import org.mapstruct.InjectionStrategy
-import org.mapstruct.Mapper
-import org.mapstruct.MappingConstants
-import org.mapstruct.ReportingPolicy
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
-interface QRCodeDataMapper {
+@Component
+class QRCodeDataMapper {
 
-    infix fun toDto(request: QRCodeUUIDRequest): QRCodeUUIDDto
+    infix fun toDto(request: QRCodeUUIDRequest): QRCodeUUIDDto =
+        QRCodeUUIDDto(
+            uuid = request.uuid
+        )
 
 }
