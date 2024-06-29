@@ -7,22 +7,45 @@ import com.project.indistraw.domain.account.adapter.input.data.response.AccountI
 import com.project.indistraw.domain.movie.adapter.input.data.response.FilmographyResponse
 import com.project.indistraw.domain.account.application.port.input.dto.*
 import com.project.indistraw.domain.movie.application.port.input.dto.FilmographyDto
-import org.mapstruct.InjectionStrategy
-import org.mapstruct.Mapper
-import org.mapstruct.MappingConstants
-import org.mapstruct.ReportingPolicy
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
-interface AccountDataMapper {
+@Component
+class AccountDataMapper {
 
-    infix fun toDto(request: UpdatePasswordRequest): UpdatePasswordDto
-    infix fun toDto(request: UpdateAddressRequest): UpdateAddressDto
-    infix fun toDto(request: UpdateAccountInfoRequest): UpdateAccountInfoDto
-    infix fun toResponse(dto: AccountInfoDto): AccountInfoResponse
-    infix fun toResponse(dto: FilmographyDto): FilmographyResponse
+    infix fun toDto(request: UpdatePasswordRequest): UpdatePasswordDto =
+        UpdatePasswordDto(
+            phoneNumber = request.phoneNumber,
+            newPassword = request.newPassword
+        )
+
+    infix fun toDto(request: UpdateAddressRequest): UpdateAddressDto =
+        UpdateAddressDto(
+            zipcode = request.zipcode,
+            streetAddress = request.streetAddress,
+            detailAddress = request.detailAddress
+        )
+
+    infix fun toDto(request: UpdateAccountInfoRequest): UpdateAccountInfoDto =
+        UpdateAccountInfoDto(
+            name = request.name,
+            profileUrl = request.profileUrl
+        )
+
+    infix fun toResponse(dto: AccountInfoDto): AccountInfoResponse =
+        AccountInfoResponse(
+            accountIdx = dto.accountIdx,
+            id = dto.id,
+            name = dto.name,
+            phoneNumber = dto.phoneNumber,
+            zipcode = dto.zipcode,
+            address = dto.address,
+            profileUrl = dto.profileUrl
+        )
+
+    infix fun toResponse(dto: FilmographyDto): FilmographyResponse =
+        FilmographyResponse(
+            idx = dto.idx,
+            thumbnailUrl = dto.thumbnailUrl
+        )
 
 }
