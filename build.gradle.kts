@@ -39,6 +39,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+	/* spring cloud */
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+
 	/* test */
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
@@ -86,6 +89,12 @@ dependencies {
 
 	/* aws */
 	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2021.0.5")
+	}
 }
 
 tasks.withType<KotlinCompile> {
