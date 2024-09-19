@@ -65,7 +65,7 @@ dependencies {
 	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
 	/* DB */
-	implementation("mysql:mysql-connector-java:8.0.32")
+//	implementation("mysql:mysql-connector-java:8.0.32")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("io.lettuce:lettuce-core:6.1.5.RELEASE")
 	implementation("org.mariadb.jdbc:mariadb-java-client:3.1.2")
