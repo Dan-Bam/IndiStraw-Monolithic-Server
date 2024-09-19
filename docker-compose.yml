@@ -28,6 +28,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: kimgyeongsu/indistraw-service
     container_name: indistraw-service
     ports:
       - 8080:8080
