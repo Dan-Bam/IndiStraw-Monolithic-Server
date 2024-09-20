@@ -1,0 +1,44 @@
+name: Indistraw CD
+
+on:
+  push:
+    branches: [ "main" , "develop" ]
+  pull_request:
+    branches: [ "main" , "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      ## Dockerhub Login
+      - name: Login to DockerHub
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+        run: docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_PASSWORD}}
+
+      ## Docker-Compose Down
+      - name: Down Docker-Compose
+        run: sudo docker-compose down
+
+      ## Docker-Compose Pull
+      - name: Pull Docker-Compose
+        run: sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-server
+          sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-mysql
+          sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-redis
+
+      ## Docker-Compose Up
+      - name: Up Docker-Compose
+        run: sudo docker-compose up -d
+
+      ## Docker-Image Prune
+      - name: Prune Docker-Image
+        run: sudo docker image prune -f
