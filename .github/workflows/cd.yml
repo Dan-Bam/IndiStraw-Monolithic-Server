@@ -44,4 +44,3 @@ jobs:
           
             # Docker-Image Prune
             sudo docker image prune -f
-          EOF
