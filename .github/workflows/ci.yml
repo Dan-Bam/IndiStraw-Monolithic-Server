@@ -35,7 +35,6 @@ jobs:
 
       ## Docker image build
       - name: Build the Docker image
-        env:
         run: docker build --platform linux/amd64 -t ${{secrets.DOCKERHUB_USERNAME}}/indistraw-server .
 
       ## Docker image push
