@@ -1,4 +1,4 @@
-name: CI
+name: Indistraw CI
 
 on:
   push:
@@ -6,12 +6,16 @@ on:
   pull_request:
     branches: [ "main" , "develop" ]
 
+permissions:
+  contents: read
+
 jobs:
-  CI:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 11
@@ -19,33 +23,27 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          cache: gradle
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Set up JDK 11 job success
-        if: ${{success()}}
-        run: echo "JDK 11 job succeeded"
-
+      ## Permission for Gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      ## Gradle build
       - name: Build with Gradle
-        run: ./gradlew clean build --no-daemon
+        run: ./gradlew bootJar
 
-      - name: IndiStraw Server CI success Discord Notification
-        uses: sarisia/actions-status-discord@v1
-        if: ${{ success() }}
-        with:
-          title: ✅ IndiStraw Server CI success ✅
-          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
-          color: 00FF00
+      ## Dockerhub Login
+      - name: Login Dockerhub
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
+        run: docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_PASSWORD}}
 
-      - name: IndiStraw Server CI failed Discord Notification
-        uses: sarisia/actions-status-discord@v1
-        if: ${{ failure() }}
-        with:
-          title: ❌ IndiStraw Server CI failed ❌
-          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
-          color: FF0000
+      ## Docker image build
+      - name: Build the Docker image
+        env:
+        run: docker build --platform linux/amd64 -t ${{secrets.DOCKERHUB_USERNAME}}/indistraw-server .
+
+      ## Docker image push
+      - name: Docker Push
+        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/indistraw-server
