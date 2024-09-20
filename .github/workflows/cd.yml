@@ -24,7 +24,7 @@ jobs:
 
       ## Docker-Compose Down
       - name: Down Docker-Compose
-        run: sudo docker-compose down
+        run: sudo docker-compose down || true
 
       ## Docker-Compose Pull
       - name: Pull Docker-Compose
