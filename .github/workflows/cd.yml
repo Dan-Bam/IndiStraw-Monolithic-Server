@@ -24,6 +24,7 @@ jobs:
 
       ## Docker-Compose Down
       - name: Down Docker-Compose
+        working-directory: /IndiStraw-Monolithic-Server
         run: sudo docker-compose down || true
 
       ## Docker-Compose Pull
@@ -35,6 +36,7 @@ jobs:
 
       ## Docker-Compose Up
       - name: Up Docker-Compose
+        working-directory: /IndiStraw-Monolithic-Server
         run: sudo docker-compose up -d
 
       ## Docker-Image Prune
