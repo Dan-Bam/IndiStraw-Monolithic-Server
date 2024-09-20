@@ -30,8 +30,8 @@ jobs:
       - name: Pull Docker-Compose
         run: |
           sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-server
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-mysql
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-redis
+          sudo docker pull ${{ secrets.DOCKER_REPO }}/mysql
+          sudo docker pull ${{ secrets.DOCKER_REPO }}/redis
 
       ## Docker-Compose Up
       - name: Up Docker-Compose
