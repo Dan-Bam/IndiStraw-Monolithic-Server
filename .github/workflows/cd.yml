@@ -22,23 +22,26 @@ jobs:
       - name: Login to DockerHub
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      ## Docker-Compose Down
-      - name: Down Docker-Compose
-        working-directory: /IndiStraw-Monolithic-Server
-        run: sudo docker-compose down || true
-
-      ## Docker-Compose Pull
-      - name: Pull Docker-Compose
+      ## EC2 인스턴스에 접속하여 Docker Compose 작업 수행
+      - name: SSH into EC2 and run Docker Compose
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_SSH_PORT: ${{ secrets.EC2_SSH_PORT }}
         run: |
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-service
-          sudo docker pull mysql
-          sudo docker pull redis
-
-      ## Docker-Compose Up
-      - name: Up Docker-Compose
-        working-directory: /IndiStraw-Monolithic-Server
-        run: sudo docker-compose up -d
-
-      ## Docker-Image Prune
-      - name: Prune Docker-Image
-        run: sudo docker image prune -f
+            # Docker-Compose Down
+            cd /IndiStraw-Monolithic-Server
+            sudo docker-compose down || true
+          
+            # Docker-Compose Pull
+            sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-service
+            sudo docker pull mysql
+            sudo docker pull redis
+          
+            # Docker-Compose Up
+            sudo docker-compose up -d
+          
+            # Docker-Image Prune
+            sudo docker image prune -f
+          EOF
