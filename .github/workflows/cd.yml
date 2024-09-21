@@ -30,7 +30,7 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
           EC2_SSH_PORT: ${{ secrets.EC2_SSH_PORT }}
-        run: |
+        script: |
             # Docker-Compose Down
             cd /IndiStraw-Monolithic-Server
             sudo docker-compose down || true
