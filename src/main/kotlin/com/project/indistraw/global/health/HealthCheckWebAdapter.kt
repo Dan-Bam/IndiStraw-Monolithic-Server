@@ -9,6 +9,6 @@ class HealthCheckWebAdapter {
 
     @GetMapping
     fun healthCheck(): ResponseEntity<Map<String, String>> =
-        ResponseEntity.ok(mapOf("message" to "Indi-Straw server running"))
+        ResponseEntity.ok(mapOf("message" to "IndiStraw server running"))
 
 }
