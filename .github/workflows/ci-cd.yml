@@ -53,8 +53,6 @@ jobs:
             
             # Docker-Compose Pull
             sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-service
-            sudo docker pull mysql
-            sudo docker pull redis
             
             # Docker-Compose Up
             sudo docker-compose up -d
