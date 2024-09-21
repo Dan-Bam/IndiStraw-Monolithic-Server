@@ -25,23 +25,23 @@ jobs:
       ## EC2 인스턴스에 접속하여 Docker Compose 작업 수행
       - name: SSH into EC2 and run Docker Compose
         uses: appleboy/ssh-action@master
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-          PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
-          EC2_SSH_PORT: ${{ secrets.EC2_SSH_PORT }}
-        script: |
-            # Docker-Compose Down
-            cd /IndiStraw-Monolithic-Server
-            sudo docker-compose down || true
-          
-            # Docker-Compose Pull
-            sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-service
-            sudo docker pull mysql
-            sudo docker pull redis
-          
-            # Docker-Compose Up
-            sudo docker-compose up -d
-          
-            # Docker-Image Prune
-            sudo docker image prune -f
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: ${{ secrets.EC2_SSH_PORT }}
+          script: |
+              # Docker-Compose Down
+              cd /IndiStraw-Monolithic-Server
+              sudo docker-compose down || true
+            
+              # Docker-Compose Pull
+              sudo docker pull ${{ secrets.DOCKER_REPO }}/indistraw-service
+              sudo docker pull mysql
+              sudo docker pull redis
+            
+              # Docker-Compose Up
+              sudo docker-compose up -d
+            
+              # Docker-Image Prune
+              sudo docker image prune -f
