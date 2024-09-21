@@ -48,7 +48,7 @@ jobs:
           port: ${{ secrets.EC2_SSH_PORT }}
           script: |
             # Docker-Compose Down
-            cd /IndiStraw-Monolithic-Server
+            cd IndiStraw-Monolithic-Server/
             sudo docker-compose down || true
             
             # Docker-Compose Pull
