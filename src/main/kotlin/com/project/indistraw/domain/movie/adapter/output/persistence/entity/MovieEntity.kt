@@ -6,7 +6,10 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Table(name = "movie")
+@Table(
+    name = "movie",
+    indexes = [Index(name = "idx_genre", columnList = "genre")]
+)
 class MovieEntity(
     @Column(name = "movie_idx", nullable = false)
     override val idx: Long,

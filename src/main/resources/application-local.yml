@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/indistraw_local
+    url: jdbc:mysql://localhost:3306/indistraw
     username: root
     password: ${DB_LOCAL_PASSWORD}
 
