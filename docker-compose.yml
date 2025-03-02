@@ -1,37 +1,38 @@
 version: "3"
 
 services:
-  mysql:
-    image: mysql:8.0.0
-    container_name: indistraw-mysql
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-    ports:
-      - "3306:3306"
-    command:
-      - "mysqld"
-      - "--character-set-server=utf8mb4"
-      - "--collation-server=utf8mb4_unicode_ci"
-    env_file:
-      - .env
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-  redis:
-    image: redis
-    container_name: indistraw-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
+#  mysql:
+#    image: mysql:8.0.0
+#    container_name: indistraw-mysql
+#    environment:
+#      MYSQL_DATABASE: ${MYSQL_DATABASE}
+#      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#      MYSQL_USER: ${MYSQL_USER}
+#    ports:
+#      - "3306:3306"
+#    command:
+#      - "mysqld"
+#      - "--character-set-server=utf8mb4"
+#      - "--collation-server=utf8mb4_unicode_ci"
+#    env_file:
+#      - .env
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#
+#  redis:
+#    image: redis
+#    container_name: indistraw-redis
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - redis_data:/data
 
   jenkins:
     image: jenkins/jenkins:lts-jdk11
-    container_name: jenkins
+    container_name: indistraw-jenkins
     environment:
       - TZ=Asia/Seoul
+      - JAVA_OPTS="-Xms256m -Xmx512m"
     user: root
     privileged: true
     ports:
@@ -55,6 +56,6 @@ services:
       - .env
 
 volumes:
-  mysql_data:
-  redis_data:
+#  mysql_data:
+#  redis_data:
   jenkins_home:

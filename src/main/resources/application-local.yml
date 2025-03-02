@@ -1,16 +1,16 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/indistraw
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://svc.sel3.cloudtype.app:30176/indistraw
     username: root
-    password: ${DB_LOCAL_PASSWORD}
+    password: rudtn1991!
 
   redis:
-    host: localhost
-    port: 6379
+    host: svc.sel5.cloudtype.app
+    port: 31093
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
       ddl-auto: update
     show-sql: true
