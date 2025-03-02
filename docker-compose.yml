@@ -49,9 +49,9 @@ services:
     container_name: indistraw-service
     ports:
       - 8080:8080
-    depends_on:
-      - mysql
-      - redis
+#    depends_on:
+#      - mysql
+#      - redis
     env_file:
       - .env
 
