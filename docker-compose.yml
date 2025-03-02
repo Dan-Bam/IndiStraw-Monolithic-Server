@@ -32,7 +32,6 @@ services:
     container_name: indistraw-jenkins
     environment:
       - TZ=Asia/Seoul
-      - JAVA_OPTS="-Xms256m -Xmx512m"
     user: root
     privileged: true
     ports:
