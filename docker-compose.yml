@@ -54,7 +54,7 @@ services:
     env_file:
       - .env
 
-volumes:
+#volumes:
 #  mysql_data:
 #  redis_data:
 #  jenkins_home:
